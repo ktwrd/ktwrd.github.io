@@ -1,2 +1,2 @@
 # Kate's (somewhat useful) Documents
-- [Type Conversions](Type%20Conversions.md)
+- [Type Conversions](Type%20Conversions)
