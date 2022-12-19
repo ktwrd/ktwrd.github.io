@@ -15,6 +15,7 @@
 ## Sysadmin
 - [flame](https://github.com/pawelmalak/flame) `Self-hosted Dashboard/Homepage`
 - [Gitea](https://gita.io) ([Source](https://github.com/go-gitea/gitea)) `Git Server written in Go`
+- [OSX KVM](https://github.com/kholia/OSX-KVM) `Run OSX on QEMU/KVM`
 - [phpservermonitor](https://www.phpservermonitor.org) ([Source](https://github.com/phpservermon/phpservermon), [Docker](https://github.com/phpservermon/docker-phpservermonitor))
 - [quickemu](https://github.com/quickemu-project/quickemu) `Quickly create and run optimised Windows, macOS and Linux desktop virtual machines.`
 - [Uptime Kuma](https://github.com/louislam/uptime-kuma) `Self-hosted Uptime/Status Page`
@@ -24,6 +25,7 @@
 - [Windows-collection](https://github.com/LaoYangList/Windows-collection) `List of publicly available Windows ISO Files`
 ## Customization
 - [RetroBar](https://github.com/dremin/RetroBar) `Retro Taskbar`
+- [Open-Shell](https://open-shell.github.io/Open-Shell-Menu/) ([Source](https://github.com/Open-Shell/Open-Shell-Menu)) `Alternative shell for Windows. Based off ClassicShell`
 
 ## Tools
 - [DevToys](https://github.com/veler/DevToys) `A Swiss Army knife for developers.`
