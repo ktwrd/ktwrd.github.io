@@ -48,6 +48,9 @@
   - [DevToys](https://github.com/veler/DevToys) `A Swiss Army knife for developers.`
   - [PowerTools](github.com/microsoft/powertoys) `Windows system utilities to maximize productivity`
 
+# Linux
+- [App Image Launcher](https://github.com/TheAssassin/AppImageLauncher) `Helper application for Linux distributions serving as a kind of "entry point" for running and integrating AppImages`
+
 # Other
 - [Anime Girls Holding Programming Books](https://github.com/cat-milk/Anime-Girls-Holding-Programming-Books)
 - [catppuccin](https://github.com/catppuccin/) `Color Scheme`
