@@ -8,6 +8,7 @@
 # Programming
 [`Go to top`](#top)
 - [Gitahead](https://gitahead.com) `Version Control`
+- [Visual Studio](https://visualstudio.com) `IDE, I use it for C++/C# Development`
 - [Visual Studio Code](https://code.visualstudio.com/) `IDE`
 - C#
   - [ConfuserEx-Reborn](https://github.com/CubeCoders/ConfuserEx-Reborn) `An open-source, free protector for .NET applications`
@@ -32,6 +33,9 @@
   - [phpservermonitor](https://www.phpservermonitor.org) ([Source](https://github.com/phpservermon/phpservermon), [Docker](https://github.com/phpservermon/docker-phpservermonitor))
   - [quickemu](https://github.com/quickemu-project/quickemu) `Quickly create and run optimised Windows, macOS and Linux desktop virtual machines.`
   - [Uptime Kuma](https://github.com/louislam/uptime-kuma) `Self-hosted Uptime/Status Page`
+- File Wiping
+  - [ABAN](https://aban.derobert.net/) `Bootable alternative to DBAN, has UEFI support and is based on Debian.`
+  - [DBAN](https://dban.org/) `Bootable drive wiper, Works with BIOS only. But has a paid option for UEFI support.`
 
 # Windows
 [`Go to top`](#top)
@@ -46,6 +50,7 @@
   - [WinAmp](https://www.winamp.com/player/downloads/) `Audio Player, WACUP recommended over vanilla WinAmp`
 - Tools
   - [DevToys](https://github.com/veler/DevToys) `A Swiss Army knife for developers.`
+  - [Eraser](https://eraser.heidi.ie/) `Secure File and Drive Wiper`
   - [PowerTools](github.com/microsoft/powertoys) `Windows system utilities to maximize productivity`
 
 # Linux
