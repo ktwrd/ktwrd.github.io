@@ -44,6 +44,7 @@
 - Customization
   - [RetroBar](https://github.com/dremin/RetroBar) `Retro Taskbar`
   - [Open-Shell](https://open-shell.github.io/Open-Shell-Menu/) ([Source](https://github.com/Open-Shell/Open-Shell-Menu)) `Alternative shell for Windows. Based off ClassicShell`
+  - [WindowBlinds](https://stardock.com/products/windowblinds) (Paid) `Shell Customization`
 - Music Players
   - [foobar2000](https://www.foobar2000.org/) `Music Player with very good cuesheet support`
   - [WACUP](https://getwacup.com/) `Fork of WinAmp`
