@@ -1,0 +1,143 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>C# JSON Class Generator</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <style>
+            textarea {
+                min-height: 40rem;
+            }
+        </style>
+    </head>
+    <body>
+        <main style="margin-top: 3rem;" class="container" role="main">
+            <h2>C# JSON Class Generator</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>JSON Property Name</th>
+                        <th>C# Type</th>
+                        <th>C# Field Name</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="input_data">
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td colspan="3">
+                            <a href="#" class="btn btn-primary my-2" id="item_add">Add</a>
+                            <a href="#" class="btn btn-primary my-2" id="item_clear">Clear</a>
+                            <a href="#" class="btn btn-secondary my-2" id="item_gen">Generate</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3>C# Code</h3>
+            <textarea id="output" style="width: 100%; font-family: monospace;"></textarea>
+        </main>
+    </body>
+    <script type="text/javascript">
+        function addInputItem()
+        {
+            let element = document.createElement(`tr`)
+            element.innerHTML =
+`<td id="item_jsonitemname"><input type="text" eventTrigger="Enter:addInputItem"></td>
+<td id="item_cstype"><input type="text" eventTrigger="Enter:addInputItem"></td>
+<td id="item_csfield"><input type="text" eventTrigger="Enter:addInputItem"></td>`;
+            document.getElementById("input_data").appendChild(element)
+            setTimeout(() => {
+                document.getElementById('input_data').lastChild.firstChild.firstChild.focus()
+            }, 100)
+        }
+        function generateData()
+        {
+            let parent = document.getElementById('input_data')
+            let result = []
+            for (let child of parent.children)
+            {
+                let propElem = null
+                let typeElem = null
+                let fieldElem = null
+                for (let ichi of child.children)
+                {
+                    for (let intn of ichi.children)
+                    {
+                        console.log(intn)
+                        switch (ichi.id)
+                        {
+                            case 'item_jsonitemname':
+                                propElem = intn
+                                break;
+                            case 'item_cstype':
+                                typeElem = intn
+                                break;
+                            case 'item_csfield':
+                                fieldElem = intn
+                                break;
+                        }
+                    }
+                }
+                result.push({
+                    prop: propElem.value,
+                    type: typeElem.value,
+                    field: fieldElem.value
+                })
+            }
+            return result
+        }
+
+        function generateOutput()
+        {
+            let inputData = generateData()
+            let lines = []
+            for (let item of inputData)
+            {
+                if (item.prop.length < 1 || item.type.length < 1 || item.field.length < 1)
+                    continue;
+                lines.push(`[JsonPropertyName("${item.prop}")]`)
+                lines.push(`public ${item.type} ${item.field} { get; set; }`)
+            }
+            document.getElementById('output').value = lines.join('\n')
+        }
+        let logic = {
+            addInputItem,
+            generateData,
+            generateOutput
+        }
+
+        document.getElementById('item_add').addEventListener('click', () => {
+            addInputItem()
+        })
+        document.getElementById('item_clear').addEventListener('click', () => {
+            document.getElementById('input_data').innerHTML = ''
+        })
+        document.getElementById('item_gen').addEventListener('click', () => {
+            generateOutput()
+        })
+        document.addEventListener('keyup', (ev) => {
+            console.log(ev)
+            let target = ev.target
+            for (let attr of target.attributes) {
+                console.log(attr)
+                if (attr.nodeName == "eventtrigger")
+                {
+                    let attriValueSplit = attr.nodeValue.split(':')
+                    if (attriValueSplit[0] == ev.key)
+                    {
+                        logic[attriValueSplit[1]]()
+                        console.log('calling')
+                    }
+                }
+            }
+        })
+        document.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('output').value = ''
+                document.getElementById('input_data').innerHTML = ''
+            }, 100)
+        })
+    </script>
+
+</html>
