@@ -1,0 +1,28 @@
+@import url("css/bootstrap.min.css");
+textarea {
+    min-height: 10rem;
+}
+main.container[role=main] {
+    margin-top: 3rem;
+}
+textarea#output {
+    width: 100%;
+    font-family: monospace;
+}
+textarea.code {
+    font-family: monospace;
+}
+
+tr.fullwid td textarea,
+tr.fullwid th textarea {
+    width: 100%;
+}
+
+.flow {
+    display: flex;
+    flex-direction: row;
+}
+.flow div,
+.flow button {
+    margin-right: 3rem;
+}
