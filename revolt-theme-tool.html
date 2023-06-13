@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Revolt Theme Tool</title>
+        <link href="style.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <main class="container" role="main">
+            <h1>Revolt Theme Utility</h1>
+            Used for inserting new CSS into an existing theme override. Also used for generating the Body for the API Endpoint to apply your theme settings (<a href="https://developers.revolt.chat/api/#tag/Sync/operation/set_settings_req">see api docs</a>).
+            <table style="margin-top: 1rem;" class="table">
+                <tr>
+                    <th>Existing JSON</th>
+                    <th>New CSS</th>
+                </tr>
+                <tr class="fullwid">
+                    <td><textarea id="existingJson" class="code"></textarea></td>
+                    <td><textarea id="newCss" class="code"></textarea></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="flow">
+                            <button id="generate" class="btn btn-primary btn-sm">Generate</button>
+                            <div>
+                                <input type="checkbox" id="indent" class="form-check-input">
+                                <label for="indent" class="form-check-label">Indent</label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Output</th>
+                    <th>API Request Content</th>
+                </tr>
+                <tr class="fullwid">
+                    <td><textarea id="output" class="code"></textarea></td>
+                    <td><textarea id="output-api" class="code"></textarea></td>
+                </tr>
+            </table>
+        </main>
+    </body>
+    <script type="text/javascript">
+        function generate()
+        {
+            let existingElement = document.getElementById("existingJson")
+            let cssElemennt = document.getElementById("newCss")
+            let outputElement = document.getElementById("output")
+            let outputApiElement = document.getElementById("output-api")
+
+            let data = JSON.parse(existingElement.value.toString())
+            data.css = cssElemennt.value.toString()
+            if (document.getElementById("indent").checked) {
+                outputElement.value = JSON.stringify(data, null, '    ')
+                outputApiElement.value = JSON.stringify({
+                    theme: JSON.stringify(data)
+                }, null, '    ')
+            } else {
+                outputElement.value = JSON.stringify(data)
+                outputApiElement.value = JSON.stringify({
+                    theme: JSON.stringify(data)
+                })
+            }
+        }
+        document.getElementById("generate").addEventListener('click', () => generate())
+    </script>
+</html>
