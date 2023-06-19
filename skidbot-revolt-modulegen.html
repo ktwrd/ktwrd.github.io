@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Command Module Generator for Skidbot Revolt</title>
+        <link href="style.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <main class="container" role="main">
+            <h2>Command Module Generator for Skidbot Revolt</h2>
+            <table class="table">
+                <tr style="display: none;"">
+                    <th>Has Help Content</th>
+                    <td><input type="checkbox" id="hasHelpContent"></td>
+                </tr>
+                <tr>
+                    <th>Internal Name</th>
+                    <td><input type="text" id="internalName"></td>
+                </tr>
+                <tr>
+                    <th>Help Category</th>
+                    <td><input type="text" id="helpCategory"></td>
+                </tr>
+                <tr>
+                    <th>Base Command Name</th>
+                    <td><input type="text" id="baseCommandName"></td>
+                </tr>
+                <tr>
+                    <th>Class Name</th>
+                    <td><input type="text" id="className"></td>
+                </tr>
+            </table>
+            <a href="#" class="btn btn-primary" id="generate">Generate</a>
+            <textarea style="min-height: min(20rem, 50vh);" id="output"></textarea>
+        </main>
+    </body>
+    <script type="text/javascript">
+        function generateOutput()
+        {
+            let hasHelpContent = document.getElementById("hasHelpContent").checked
+            let internal = document.getElementById("internalName").value
+            let category = document.getElementById("helpCategory").value
+            let cmdName = document.getElementById("baseCommandName").value
+            let className = document.getElementById("className").value
+            
+            let catStr = category == null || category.length < 1 ? "null" : `"${category}"`;
+            let intStr = internal == null || internal.length < 1 ? "null" : `"${internal}"`;
+            let cmdStr = cmdName == null || cmdName.length < 1 ? "null" : `"${cmdName}"`;
+
+            let content =
+`[RevSharpModule]
+public class ${className} : BaseModule
+{
+    public override async Task CommandReceived(CommandInfo info, Message message)
+    {
+        
+    }
+
+    public override bool? HasHelpContent => ${hasHelpContent};
+    public override string? InternalName => ${intStr};
+    public override string? HelpCategory => ${catStr};
+    public override string? BaseCommandName => ${cmdStr};
+}`
+            console.log(content)
+            document.getElementById("output").innerHTML = content
+        }
+        document.getElementById("generate").addEventListener('click', () => {
+            generateOutput()
+        })
+    </script>
+</html>
