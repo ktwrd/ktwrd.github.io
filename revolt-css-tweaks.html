@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Revolt CSS Tweaks</title>
+        <link href="style.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <main class="container" role="main">
+            <h3>Revolt CSS Tweaks</h3>
+            <table class="table">
+                <tr>
+                    <td>
+                        <input type="checkbox" id="embedImageSize" />
+                        <label for="embedImageSize">Limit Embed Image Size (max 12rem)</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" id="hideUnreadMessageIndicator" />
+                        <label for="hideUnreadMessageIndicator">Hide Unread Message Indicator</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="codeblockTextSize">Codeblock Text Size (must be valid <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-size"><code>font-size</code></a> value)</label><br>
+                        <input type="text" id="codeblockTextSize" placeholder="14px" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <a href="#" class="btn btn-primary" id="generate">Generate CSS</a>
+                    </th>
+                </tr>
+                <tr>
+                    <td><textarea id="output" style="min-height: 24rem;"></textarea></td>
+                </tr>
+            </table>
+        </main>
+    </body>
+    <script type="text/javascript">
+        const data = {
+            'embedImageSize':
+`/* max embedded image size of 12rem */
+._image_dxa3n_9 {
+    max-height: 12rem;
+    max-width: 12rem;
+    object-fit: cover;
+}`,
+            'hideUnreadMessageIndicator':
+`/* hide unread message indicator */
+div[class^="SidebarBase"] div[class^="Base"] div span a svg circle,
+div[class^="_alert_1avxi_"][data-style="unread"] {
+    opacity: 0;
+}`,
+            'codeblockTextSize':
+`/* custom font size for code blocks */
+.bWNgVL, ._settings_t7t23_33 ._sidebar_t7t23_39 ._version_t7t23_53, .cerZqH .code, .bWaHqo {
+    font-size: %value%;
+}`
+        }
+
+        function generate()
+        {
+            let content = []
+            let entries = Object.entries(data)
+            for (let pair of entries)
+            {
+                let element = document.getElementById(pair[0])
+                if (element.attributes['type'].value == 'checkbox') {
+                    if (element.checked) {
+                        content.push(pair[1])
+                    }
+                } else if (element.value != undefined && typeof element.value == "string") {
+                    let targetValue = element.value
+                    if (element.value.length < 1 && element.placeholder != undefined && element.placeholder.length > 0) {
+                        targetValue = element.placeholder
+                    }
+                    content.push(pair[1].replaceAll('%value%', targetValue))
+                }
+            }
+            document.getElementById('output').innerHTML = content.map(v => v + "\n").join('\n')
+        }
+        document.getElementById("generate").addEventListener('click', () => {
+            generate()
+        })
+    </script>
+</html>
