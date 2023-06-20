@@ -22,8 +22,26 @@
                 </tr>
                 <tr>
                     <td>
+                        <input type="checkbox" id="hideHomeActions" />
+                        <label for="hideHomeActions">Hide Homepage Actions</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" id="disableAnimModal" />
+                        <label for="disableAnimModal">Disable Modal Animations</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
                         <label for="codeblockTextSize">Codeblock Text Size (must be valid <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-size"><code>font-size</code></a> value)</label><br>
                         <input type="text" id="codeblockTextSize" placeholder="14px" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="userIconRadius">User Icon Border Radius (must be valid <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-size"><code>font-size</code></a> value)</label><br>
+                        <input type="text" id="userIconRadius" placeholder="50%" />
                     </td>
                 </tr>
                 <tr>
@@ -56,7 +74,23 @@ div[class^="_alert_1avxi_"][data-style="unread"] {
 `/* custom font size for code blocks */
 .bWNgVL, ._settings_t7t23_33 ._sidebar_t7t23_39 ._version_t7t23_53, .cerZqH .code, .bWaHqo {
     font-size: %value%;
-}`
+}`,
+            'hideHomeActions':
+`/* hide homescreen actions */
+[class^="_home_"] [class^="_homeScreen_"] [class^="_actions_"] {
+  display: none;
+}`,
+            'disableAnimModal':
+`/* disable modal animations */
+[class^="Container-sc-"], [class^="Base-sc-"], [class^="_settings_"] {
+	animation: none !important;
+	transition: none !important;
+}`,
+            'userIconRadius':
+`/* custom user icon border radius */
+:root {
+    --border-radius-user-icon: %value%;    
+}`,
         }
 
         function generate()
