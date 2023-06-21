@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>C# String Enum Generator</title>
+        <link href="style.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <main class="container" role="main">
+            <h2>C# String Enum Generator</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>String Value</th>
+                        <th>Enum Name</th>
+                    </tr>
+                </thead>
+                <tbody id="input_data">
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td colspan="2">
+                            <a href="#" class="btn btn-primary my-2" id="item_add">Add</a>
+                            <a href="#" class="btn btn-primary my-2" id="item_clear">Clear</a>
+                            <a href="#" class="btn btn-secondary my-2" id="item_gen">Generate</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3>Enum Content</h3>
+            <textarea id="output"></textarea>
+        </main>
+    </body>
+    <script type="text/javascript">
+        function addInputItem()
+        {
+            let element = document.createElement(`tr`)
+            element.innerHTML =
+`<td id="item_string"><input type="text" eventTrigger="Enter:addInputItem"></td>
+<td id="item_enum"><input type="text" eventTrigger="Enter:addInputItem"></td>`;
+            document.getElementById("input_data").appendChild(element)
+            setTimeout(() => {
+                document.getElementById('input_data').lastChild.firstChild.firstChild.focus()
+            }, 100)
+        }
+        function generateData()
+        {
+            let parent = document.getElementById('input_data')
+            let result = []
+            for (let child of parent.children)
+            {
+                let stringValueElem = null
+                let enumNameValue = null
+                for (let ichi of child.children)
+                {
+                    for (let intn of ichi.children)
+                    {
+                        console.log(intn, ichi.id, intn.type)
+                        switch (ichi.id)
+                        {
+                            case 'item_string':
+                                stringValueElem = intn
+                                break;
+                            case 'item_enum':
+                                enumNameValue = intn
+                                break;
+                        }
+                    }
+                }
+                result.push({
+                    string: stringValueElem.value,
+                    enum: enumNameValue.value,
+                })
+            }
+            return result
+        }
+
+        function generateOutput()
+        {
+            let inputData = generateData()
+            let lines = [
+                `public enum StringEnum`,
+                `{`
+            ]
+            for (let item of inputData)
+            {
+                if (item.string.length < 1 || item.enum.length < 1)
+                    continue;
+                lines.push(`    [EnumValue("${item.string}")]`)
+                lines.push(`    ${item.enum},`)
+            }
+            lines.push(`}`)
+            document.getElementById('output').value = lines.join('\n')
+        }
+        let logic = {
+            addInputItem,
+            generateData,
+            generateOutput
+        }
+
+        document.getElementById('item_add').addEventListener('click', () => {
+            addInputItem()
+        })
+        document.getElementById('item_clear').addEventListener('click', () => {
+            document.getElementById('input_data').innerHTML = ''
+        })
+        document.getElementById('item_gen').addEventListener('click', () => {
+            generateOutput()
+        })
+        document.addEventListener('keyup', (ev) => {
+            console.log(ev)
+            let target = ev.target
+            for (let attr of target.attributes) {
+                console.log(attr)
+                if (attr.nodeName == "eventtrigger")
+                {
+                    let attriValueSplit = attr.nodeValue.split(':')
+                    if (attriValueSplit[0] == ev.key)
+                    {
+                        logic[attriValueSplit[1]]()
+                        console.log('calling')
+                    }
+                }
+            }
+        })
+        document.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('output').value = ''
+                document.getElementById('input_data').innerHTML = ''
+            }, 100)
+        })
+    </script>
+
+</html>

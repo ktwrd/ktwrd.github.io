@@ -6,5 +6,6 @@ Documents, and small html-based tools for writing code more quickly.
 - [Awesome List](Awesome)
 - [Revolt stuff](Revolt)
 - [C# JSON Class Generator](typegen.html)
+- [C# String Enum Generator](enumgen.html)
 - [Skidbot Revolt Module Generator](skidbot-revolt-modulegen.html)
 - [Archives](Archives)
