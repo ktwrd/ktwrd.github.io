@@ -86,7 +86,7 @@
             {
                 if (item.string.length < 1 || item.enum.length < 1)
                     continue;
-                lines.push(`    [EnumValue("${item.string}")]`)
+                lines.push(`    [EnumMember(Value = "${item.string}")]`)
                 lines.push(`    ${item.enum},`)
             }
             lines.push(`}`)
