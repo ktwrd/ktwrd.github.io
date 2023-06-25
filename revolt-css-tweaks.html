@@ -45,6 +45,12 @@
                     </td>
                 </tr>
                 <tr>
+                    <td>
+                        <input type="checkbox" id="fullWidthEmbed" />
+                        <label for="fullWidthEmbed">Full Width Embeds</label>
+                    </td>
+                </tr>
+                <tr>
                     <th>
                         <a href="#" class="btn btn-primary" id="generate">Generate CSS</a>
                     </th>
@@ -91,6 +97,11 @@ div[class^="_alert_1avxi_"][data-style="unread"] {
 :root {
     --border-radius-user-icon: %value%;    
 }`,
+            'fullWidthEmbed':
+`/* full-width embed */
+[class^="MessageBase__MessageContent"] [class^="_embed"] {
+    width: 100% !important;
+}`
         }
 
         function generate()
