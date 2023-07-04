@@ -138,7 +138,7 @@ public class ${className} : CommandModule
     public override string? HelpCategory => ${catStr};
     public override string? BaseCommandName => ${cmdStr};
     public override bool WaitForInit => ${wfiStr};
-    public override PermissionFlag? RequireServerPermission => ${permStr};
+    public override PermissionFlag? RequirePermission => ${permStr};
     public override bool ServerOnly => ${serverOnlyString};
 }`
             console.log(content)
