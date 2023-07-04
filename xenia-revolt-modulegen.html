@@ -92,7 +92,7 @@
             let permStr = "null";
             var targetPermStrValue = document.getElementById("permOverride").options[document.getElementById("permOverride").selectedIndex].value;
             if (targetPermStrValue != null && targetPermStrValue != "null")
-                permStr = `"${targetPermStrValue}"`;
+                permStr = `PermissionFlag.${targetPermStrValue}`;
 
             let content =
 `[RevSharpModule]
