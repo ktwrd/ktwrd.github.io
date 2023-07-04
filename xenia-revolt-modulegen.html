@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Command Module Generator for Xenia Revolt</title>
+        <link href="style.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <main class="container" role="main">
+            <h2>Command Module Generator for Xenia Revolt</h2>
+            <table class="table">
+                <tr style="display: none;"">
+                    <th>Has Help Content</th>
+                    <td><input type="checkbox" id="hasHelpContent"></td>
+                </tr>
+                <tr>
+                    <th>Help Category</th>
+                    <td><input type="text" id="helpCategory"></td>
+                </tr>
+                <tr>
+                    <th>Base Command Name</th>
+                    <td><input type="text" id="baseCommandName"></td>
+                </tr>
+                <tr>
+                    <th>Class Name</th>
+                    <td><input type="text" id="className"></td>
+                </tr>
+                <tr>
+                    <th>Wait for init</th>
+                    <td><input type="checkbox" id="waitForInit" /></td>
+                </tr>
+                <tr>
+                    <th>Permission Override</th>
+                    <td>
+                        <select id="permOverride">
+                            <option value="null" selected>None</option>
+                            <option value="ManageChannel">ManageChannel</option>
+                            <option value="ManageServer">ManageServer</option>
+                            <option value="ManagePermissions">ManagePermissions</option>
+                            <option value="ManageRole">ManageRole</option>
+                            <option value="ManageCustomisation">ManageCustomisation</option>
+                            <option value="KickMembers">KickMembers</option>
+                            <option value="BanMembers">BanMembers</option>
+                            <option value="TimeoutMembers">TimeoutMembers</option>
+                            <option value="AssignRoles">AssignRoles</option>
+                            <option value="ChangeNickname">ChangeNickname</option>
+                            <option value="ManageNicknames">ManageNicknames</option>
+                            <option value="ChangeAvatar">ChangeAvatar</option>
+                            <option value="RemoveAvatars">RemoveAvatars</option>
+                            <option value="ViewChannel">ViewChannel</option>
+                            <option value="ReadMessageHistory">ReadMessageHistory</option>
+                            <option value="SendMessage">SendMessage</option>
+                            <option value="ManageMessages">ManageMessages</option>
+                            <option value="ManageWebhooks">ManageWebhooks</option>
+                            <option value="InviteOthers">InviteOthers</option>
+                            <option value="SendEmbeds">SendEmbeds</option>
+                            <option value="UploadFiles">UploadFiles</option>
+                            <option value="Masquerade">Masquerade</option>
+                            <option value="React">React</option>
+                            <option value="Connect">Connect</option>
+                            <option value="Speak">Speak</option>
+                            <option value="Video">Video</option>
+                            <option value="MuteMembers">MuteMembers</option>
+                            <option value="DeafenMembers">DeafenMembers</option>
+                            <option value="MoveMembers">MoveMembers</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Server Only</th>
+                    <td><input type="checkbox" id="serverOnly" /></td>
+                </tr>
+            </table>
+            <a href="#" class="btn btn-primary" id="generate">Generate</a>
+            <textarea style="min-height: min(20rem, 50vh);" id="output"></textarea>
+        </main>
+    </body>
+    <script type="text/javascript">
+        function generateOutput()
+        {
+            let hasHelpContent = document.getElementById("hasHelpContent").checked
+            let category = document.getElementById("helpCategory").value
+            let cmdName = document.getElementById("baseCommandName").value
+            let className = document.getElementById("className").value
+            let waitForInit = document.getElementById("waitForInit").checked;
+            let serverOnly = document.getElementById("serverOnly").checked;
+            
+            let catStr = category == null || category.length < 1 ? "null" : `"${category}"`;
+            let cmdStr = cmdName == null || cmdName.length < 1 ? "null" : `"${cmdName}"`;
+            let wfiStr = waitForInit ? "true" : "false";
+            let serverOnlyString = serverOnly ? "true" : "false";
+
+            let permStr = "null";
+            var targetPermStrValue = document.getElementById("permOverride").options[document.getElementById("permOverride").selectedIndex].value;
+            if (targetPermStrValue != null && targetPermStrValue != "null")
+                permStr = `"${targetPermStrValue}"`;
+
+            let content =
+`[RevSharpModule]
+public class ${className} : CommandModule
+{
+    public override async Task CommandReceived(CommandInfo info, Message message)
+    {
+        string action = "";
+        if (info.Arguments.Count > 0)
+            action = info.Arguments[0].ToLower();
+
+        switch (action)
+        {
+            case "help":
+                await Command_Help(info, message);
+                break;
+            default:
+                await message.Reply($"Unknown action \`{action,-1}\`. See \`{Reflection.Config.Prefix}{BaseCommandName} help\`");
+                break;
+        }
+    }
+
+    public async Task Command_Help(CommandInfo info, Message message)
+    {
+        var embed = new SendableEmbed()
+        {
+            Title = "Help Content",
+            Description = HelpContent(),
+            Colour = CommandHelper.DefaultColor
+        };
+        await message.Reply(embed);
+    }
+    
+    public override string? HelpContent()
+    {
+        return XeniaHelper.GenerateHelp(this, new List<(string, string)>()
+        {
+            ("help", "show help content for this command")
+        });
+    }
+
+    public override bool HasHelpContent => ${hasHelpContent};
+    public override string? HelpCategory => ${catStr};
+    public override string? BaseCommandName => ${cmdStr};
+    public override bool WaitForInit => ${wfiStr};
+    public override PermissionFlag? RequireServerPermission => ${permStr};
+    public override bool ServerOnly => ${serverOnlyString};
+}`
+            console.log(content)
+            document.getElementById("output").innerHTML = content
+        }
+        document.getElementById("generate").addEventListener('click', () => {
+            generateOutput()
+        })
+    </script>
+</html>
