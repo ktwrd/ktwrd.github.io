@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>C# Exception Generator</title>
+        <link href="style.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <main class="container" role="main">
+            <h3>C# Exception Generator</h3>
+            <table class="table">
+                <tr>
+                    <th>Class Name</th>
+                    <td>
+                        <input type="text" id="className" style="width: 100%; font-family: monospace;">
+                    </td>
+                </tr>
+                <tr>
+                    <th>Include Default Constructors</th>
+                    <td><input type="checkbox" id="includeDefaultCtor"></td>
+                </tr>
+                <tr>
+                    <th>Nullable Parameters</th>
+                    <td><input type="checkbox" id="nullable" checked></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <a href="#" class="btn btn-primary my-2" id="generate">Generate</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="2">Output</th>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <textarea id="output" style="height: 40vh"></textarea>
+                    </td>
+                </tr>
+            </table>
+        </main>
+    </body>
+    <script type="text/javascript">
+        function generateDefaultCtor(className, nullable)
+        {
+            let str = nullable ? 'string?' : 'string'
+            let exc = nullable ? 'Exception?' : 'Exception';
+            return
+`
+#region Constructors
+    public ${className}() : base()
+    {}
+    public ${className}(${str} message) : base(message)
+    {}
+    public ${className}(${str} message, ${exc} innerException) : base(message, innerException)
+    {}
+#endregion`;
+        }
+        document.getElementById("generate").addEventListener('click', () =>
+        {
+            let className_elem = document.getElementById("className")
+            let defCtor_elem = document.getElementById("includeDefaultCtor")
+            let nullable_elem = document.getElementById("nullable")
+
+            let className = className_elem.value
+            let nullable = nullable_elem.checked
+            let defCtor = defCtor_elem.checked
+
+            let content =
+`public class ${className} : Exception
+{
+    ${defCtor ? generateDefaultCtor(className, nullable) + '\n' : ''}
+    public override string ToString()
+    {
+        return base.ToString();
+    }
+}`;
+            document.getElementById("output").innerHTML = content
+        })
+    </script>
+</html>
