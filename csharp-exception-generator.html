@@ -39,20 +39,18 @@
         </main>
     </body>
     <script type="text/javascript">
-        function generateDefaultCtor(className, nullable)
+        const generateDefaultCtor = function(className, nullable)
         {
             let str = nullable ? 'string?' : 'string'
             let exc = nullable ? 'Exception?' : 'Exception';
-            return
-`
-#region Constructors
+            return `#region Constructors
     public ${className}() : base()
     {}
     public ${className}(${str} message) : base(message)
     {}
     public ${className}(${str} message, ${exc} innerException) : base(message, innerException)
     {}
-#endregion`;
+#endregion\n`;
         }
         document.getElementById("generate").addEventListener('click', () =>
         {
@@ -63,11 +61,12 @@
             let className = className_elem.value
             let nullable = nullable_elem.checked
             let defCtor = defCtor_elem.checked
-
+            let defCtorContent = generateDefaultCtor(className, nullable)
+            console.log(defCtorContent)
             let content =
 `public class ${className} : Exception
 {
-    ${defCtor ? generateDefaultCtor(className, nullable) + '\n' : ''}
+${defCtor ? defCtorContent : ''}
     public override string ToString()
     {
         return base.ToString();
