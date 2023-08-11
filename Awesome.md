@@ -3,6 +3,7 @@
 - [Programming](#programming)
 - [Tools](#tools)
 - [Windows](#windows)
+- [Wallpapers](#wallpapers)
 - [Other](#other)
 
 # Programming
@@ -57,6 +58,13 @@
 # Linux
 - [App Image Launcher](https://github.com/TheAssassin/AppImageLauncher) `Helper application for Linux distributions serving as a kind of "entry point" for running and integrating AppImages`
 
+# Wallpapers
+- [Creating a macOS-Style wallpaper in Photoshop](http://web.archive.org/web/20080123065049/http://psdtuts.com/tutorials-effects/creating-a-mac-type-background-in-photoshop/) `Cool tutorial`
+- [macOS Wallpapers](https://goo.gl/photos/HjY1hmo6p3jfFz8a7)
+- [Windows Wallpapers](https://wallpaperaccess.com/original-windows)
+  - [Older Windows Wallpapers](http://www.dvd3000.ca/wp/)
+
 # Other
 - [Anime Girls Holding Programming Books](https://github.com/cat-milk/Anime-Girls-Holding-Programming-Books)
 - [catppuccin](https://github.com/catppuccin/) `Color Scheme`
+
