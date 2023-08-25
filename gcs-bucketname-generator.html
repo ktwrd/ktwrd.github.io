@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>GCS Bucket Name Generator</title>
+        <link href="style.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <main class="container" role="main">
+            <h2>GCS Bucket Name Generator</h2>
+            
+            <div class="form-group">
+                <label for="regionType">Location Type</label>
+                <select class="form-control" id="regionType">
+                    <option selected value="region">Single Region</option>
+                    <option value="multi">Multi-region</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="region">Region</label>
+                <select class="form-control" id="region">
+                </select>
+            </div>
+            <div class="form-group">
+                <lable for="template">Template</lable>
+                <input id="template" class="form-control" type="text" value="storage-%rc.service.redfur.cloud"/>
+            </div>
+            <table class="table table-responsive">
+                <tr>
+                    <th colspan="2">Template Reference</th>
+                </tr>
+                <tr>
+                    <th>Region Type</th>
+                    <td><code>%rt</code></td>
+                </tr>
+                <tr>
+                    <th>Region Code</th>
+                    <td><code>%rc</code></td>
+                </tr>
+            </table>
+            <a class="btn btn-primary" id="generate" href="#">Generate</a>
+            <div class="form-group">
+                <label for="result">Result</label>
+                <textarea class="form-control" id="result"></textarea>
+            </div>
+        </main>
+    </body>
+    <script type="text/javascript">
+        const bucketMultiRegions = [
+            ['ASIA', 'Asia'],
+            ['EU', 'EU Members'],
+            ['US', 'United States']
+        ]
+        const bucketRegions = [
+            {
+                name: 'North America',
+                regionItems: [
+                    ['NORTHAMERICA-NORTHEAST1', 'Montréal'],
+                    ['NORTHAMERICA-NORTHEAST2', 'Toronto'],
+                    ['US-CENTRAL1', 'Iowa'],
+                    ['US-EAST1', 'South Carolina'],
+                    ['US-EAST4', 'Northern Virginia'],
+                    ['US-EAST5', 'Columbus'],
+                    ['US-SOUTH1', 'Dallas'],
+                    ['US-WEST1', 'Oregon'],
+                    ['US-WEST2', 'Los Angeles'],
+                    ['US-WEST3', 'Salt Lake City'],
+                    ['US-WEST4', 'Las Vegas'],
+                ]
+            },
+            {
+                name: 'South America',
+                regionItems: [
+                    ['SOUTHAMERICA-EAST1', 'São Paulo'],
+                    ['SOUTHAMERICA-WEST1', 'Santiago']
+                ]
+            },
+            {
+                name: 'Europe',
+                regionItems: [
+                    ['EUROPE-CENTRAL2','Warsaw'],
+                    ['EUROPE-NORTH1','Finland'],
+                    ['EUROPE-SOUTHWEST1','Madrid'],
+                    ['EUROPE-WEST1','Belgium'],
+                    ['EUROPE-WEST2','London'],
+                    ['EUROPE-WEST3','Frankfurt'],
+                    ['EUROPE-WEST4','Netherlands'],
+                    ['EUROPE-WEST6','Zürich'],
+                    ['EUROPE-WEST8','Milan'],
+                    ['EUROPE-WEST9','Paris'],
+                    ['EUROPE-WEST10','Berlin'],
+                    ['EUROPE-WEST12','Turin'],
+                ]
+            },
+            {
+                name: 'Asia',
+                regionItems: [
+                    ['ASIA-EAST1','Taiwan'],
+                    ['ASIA-EAST2','Hong Kong'],
+                    ['ASIA-NORTHEAST1','Tokyo'],
+                    ['ASIA-NORTHEAST2','Osaka'],
+                    ['ASIA-NORTHEAST3','Seoul'],
+                    ['ASIA-SOUTHEAST1','Singapore'],
+                ]
+            },
+            {
+                name: 'India',
+                regionItems: [
+                    ['ASIA-SOUTH1', 'Mumbai'],
+                    ['ASIA-SOUTH2', 'Delhi']
+                ]
+            },
+            {
+                name: 'Indonesia',
+                regionItems: [
+                    ['ASIA-SOUTHEAST2', 'Jakarta']
+                ],
+            },
+            {
+                name: 'Middle East',
+                regionItems: [
+                    ['ME-CENTRAL1', 'Doha'],
+                    ['ME-WEST1', 'Tel Aviv']
+                ]
+            },
+            {
+                name: 'Australia',
+                regionItems: [
+                    ['AUSTRALIA-SOUTHEAST1', 'Sydney'],
+                    ['AUSTRALIA-SOUTHEAST2', 'Melbourne'],
+                ]
+            }
+        ]
+        function getSelectedRegionType() {
+            let regionTypeElement = document.getElementById('regionType')
+            return regionTypeElement.options[regionTypeElement.selectedIndex].value
+        }
+        function generateRegionList() {
+            var regionType = getSelectedRegionType();
+            let htmlContent = ''
+            if (regionType == 'multi')
+            {
+                for (var pair of bucketMultiRegions)
+                {
+                    htmlContent += `<option value="${pair[0]}">${pair[1]}</option>\n`
+                }
+            }
+            else if (regionType == 'region')
+            {
+                for (var parent of bucketRegions)
+                {
+                    let parentHtmlContent = [
+                        `<optgroup label="${parent.name}">`
+                    ]
+                    for (var inner of parent.regionItems)
+                    {
+                        parentHtmlContent.push(`<option value="${inner[0]}">${inner[1]}</option>`)
+                    }
+                    parentHtmlContent = [
+                        ...parentHtmlContent,
+                        `</optgroup>`
+                    ]
+                    htmlContent += parentHtmlContent.join('\n') + '\n'
+                }
+            }
+            document.getElementById('region').innerHTML = htmlContent
+        }
+        function getSelectedRegionCode() {
+            let regionTypeElement = document.getElementById('region')
+            return regionTypeElement.options[regionTypeElement.selectedIndex].value
+        }
+        generateRegionList()
+        document.getElementById('regionType').onchange = () => {
+            generateRegionList()
+        }
+        document.getElementById('generate').onclick = () => {
+            let regionType = getSelectedRegionType()
+            let regionCode = getSelectedRegionCode()
+            let template = document.getElementById('template').value.toString()
+            document.getElementById('result').innerHTML = template.replaceAll('%rt', regionType).replaceAll('%rc', regionCode.toLowerCase()).replaceAll('%RC', regionCode.toUpperCase())
+        }
+    </script>
+</html>

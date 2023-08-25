@@ -10,4 +10,6 @@ Documents, and small html-based tools for writing code more quickly.
   - [C# String Enum Generator](enumgen.html)
   - [C# Exception Generator](csharp-exception-generator.html)
 - [Xenia Revolt Module Generator](xenia-revolt-modulegen.html)
+- [GCS Bucket Name Generator](gcs-bucketname-generator.html)
 - [Archives](Archives)
+- [Xonotic](Xonotic)
