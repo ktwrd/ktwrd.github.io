@@ -12,4 +12,4 @@ Documents, and small html-based tools for writing code more quickly.
 - [Xenia Revolt Module Generator](xenia-revolt-modulegen.html)
 - [GCS Bucket Name Generator](gcs-bucketname-generator.html)
 - [Archives](Archives)
-- [Xonotic](Xonotic)
+- [Xonotic](xonotic)
