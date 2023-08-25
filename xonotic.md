@@ -1,0 +1,4 @@
+- Xonotic v0.8.6 Mirror (Melbourne)
+    - [Download](https://mirror.redfur.cloud/xonotic/xonotic-0.8.6.zip)
+    - [Source](https://mirror.redfur.cloud/xonotic/xonotic-0.8.6-source.zip)
+    - [Mapping Support](https://mirror.redfur.cloud/xonotic/xonotic-0.8.6-mappingsupport.zip)
