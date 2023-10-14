@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Config Controller Generator for Xenia Discord</title>
+        <link href="style.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <main class="container" role="main">
+            <h2>Config Controller Generator for Xenia Discord</h2>
+            <table class="table">
+                <tr>
+                    <th>Class Name</th>
+                    <td><input type="text" id="className"></td>
+                </tr>
+                <tr>
+                    <th>Config Class Name</th>
+                    <td><input type="text" id="configName"></td>
+                </tr>
+                <tr>
+                    <th>Collection Name</th>
+                    <td><input type="text" id="collectionName"></td>
+                </tr>
+                <tr>
+                    <th>Store Previous Versions</th>
+                    <td><input type="checkbox" id="storePrevious"></td>
+                </tr>
+                <tr>
+                    <th>Config Id Field Name</th>
+                    <td><input type="text" id="configIdField"/></td>
+                </tr>
+                <tr>
+                    <th>Config Id Field Type</th>
+                    <td><input type="text" id="configIdFieldType"/></td>
+                </tr>
+            </table>
+            <a href="#" class="btn btn-primary" id="generate">Generate</a>
+            <textarea style="min-height: min(30rem, 60vh);" id="output"></textarea>
+        </main>
+    </body>
+    <script type="text/javascript">
+        function generateOutput()
+        {
+            let className = document.getElementById("className").value + 'ConfigController';
+            let configName = document.getElementById("configName").value + 'ConfigModel';
+            let collName = document.getElementById("collectionName").value;
+            let configIdField = document.getElementById("configIdField").value;
+            let configIdFieldType = document.getElementById("configIdFieldType").value;
+            let storePrevious = document.getElementById("storePrevious").checked;
+
+            let storePreviousBody =
+`
+    public async Task<${configName}?> GetLatest(${configIdFieldType} id)
+    {
+        var collection = GetCollection();
+        var filter = Builders<${configName}>
+            .Filter
+            .Eq("${configIdField}", id);
+        var res = await collection.FindAsync(filter);
+        var sorted = res.ToList().OrderByDescending(v => v.ModifiedAtTimestamp);
+        return sorted.FirstOrDefault();
+    }
+    
+    public async Task Add(${configName} model)
+    {
+        var collection = GetCollection();
+        model._id = default;
+        model.ModifiedAtTimestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        await collection.InsertOneAsync(model);
+    }`
+            let storeBody =
+`
+    public async Task<${configName}?> Get(${configIdFieldType} id)
+    {
+        var collection = GetCollection();
+        var filter = Builders<${configName}>
+            .Filter
+            .Eq("${configIdField}", id);
+        var res = await collection.FindAsync(filter);
+        return res.FirstOrDefault();
+    }
+    public async Task Set(${configName} model)
+    {
+        var collection = GetCollection();
+        var filter = Builders<${configName}>
+            .Filter
+            .Eq("${configIdField}", model.${configIdField});
+
+        var existResult = await collection.FindAsync(filter);
+        var exists = existResult.Any();
+
+        if (exists)
+        {
+            await collection.FindOneAndReplaceAsync(filter, model);
+        }
+        else
+        {
+            await collection.InsertOneAsync(model);
+        }
+    }`
+
+            let content =
+`[BotController]
+public class ${className} : BaseConfigController<${configName}>
+{
+    public ${className}(IServiceProvider services)
+        : base(${configName}.CollectionName, services)
+    {}
+
+    ${storePrevious ? storePreviousBody : storeBody}
+}
+
+public class ${configName} : BaseModel
+{
+    public static string CollectionName => "${collName}";
+    public ${configIdFieldType} ${configIdField} { get; set; }
+    ` + (storePrevious ? 'publuc long ModifiedAtTimestamp { get; set; }' : '') + `
+}
+`
+            console.log(content)
+            document.getElementById("output").innerHTML = content
+        }
+        document.getElementById("generate").addEventListener('click', () => {
+            generateOutput()
+        })
+    </script>
+</html>
