@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Controller Generator for Xenia Discord</title>
+        <link href="style.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <main class="container" role="main">
+            <h2>Controller Generator for Xenia Discord</h2>
+            <table class="table">
+                <tr>
+                    <th>Class Name</th>
+                    <td><input type="text" id="className"></td>
+                </tr>
+            </table>
+            <a href="#" class="btn btn-primary" id="generate">Generate</a>
+            <textarea style="min-height: min(20rem, 50vh);" id="output"></textarea>
+        </main>
+    </body>
+    <script type="text/javascript">
+        function generateOutput()
+        {
+            let className = document.getElementById("className").value
+
+            let content =
+`[BotController]
+public class ${className} : BaseController
+{
+    public ${className}(IServiceProvier services)
+        : base(services)
+    {}
+}`
+            console.log(content)
+            document.getElementById("output").innerHTML = content
+        }
+        document.getElementById("generate").addEventListener('click', () => {
+            generateOutput()
+        })
+    </script>
+</html>
