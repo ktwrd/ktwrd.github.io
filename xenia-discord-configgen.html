@@ -10,19 +10,21 @@
             <table class="table">
                 <tr>
                     <th>Class Name</th>
-                    <td><input type="text" id="className"></td>
+                    <td><input type="text" id="className"/></td>
+                    <td>Preview: <pre><code id="className_preview"></code></pre></td>
                 </tr>
                 <tr>
                     <th>Config Class Name</th>
-                    <td><input type="text" id="configName"></td>
+                    <td><input type="text" id="configName"/></td>
+                    <td>Preview: <pre><code id="configName_preview"></code></pre></td>
                 </tr>
                 <tr>
                     <th>Collection Name</th>
-                    <td><input type="text" id="collectionName"></td>
+                    <td><input type="text" id="collectionName"/></td>
                 </tr>
                 <tr>
                     <th>Store Previous Versions</th>
-                    <td><input type="checkbox" id="storePrevious"></td>
+                    <td><input type="checkbox" id="storePrevious" /></td>
                 </tr>
                 <tr>
                     <th>Config Id Field Name</th>
@@ -38,6 +40,14 @@
         </main>
     </body>
     <script type="text/javascript">
+        document.getElementById("className").addEventListener('input', function ()
+        {
+            document.getElementById("className_preview").innerHTML = document.getElementById("className").value + 'ConfigController'
+        })
+        document.getElementById("configName").addEventListener('input', function ()
+        {
+            document.getElementById("configName_preview").innerHTML = document.getElementById("configName").value + 'ConfigModel'
+        })
         function generateOutput()
         {
             let className = document.getElementById("className").value + 'ConfigController';
