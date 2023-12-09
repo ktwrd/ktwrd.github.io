@@ -9,6 +9,8 @@
 # Programming
 [`Go to top`](#top)
 - [Gitahead](https://gitahead.com) `Version Control`
+- [Github Desktop](https://desktop.github.com/) `Git GUI made by Github`
+  * [Linux Version (Shiftkey)](https://github.com/shiftkey/desktop/releases/latest)
 - [Visual Studio](https://visualstudio.com) `IDE, I use it for C++/C# Development`
 - [Visual Studio Code](https://code.visualstudio.com/) `IDE`
 - C#
@@ -34,13 +36,15 @@
   - [phpservermonitor](https://www.phpservermonitor.org) ([Source](https://github.com/phpservermon/phpservermon), [Docker](https://github.com/phpservermon/docker-phpservermonitor))
   - [quickemu](https://github.com/quickemu-project/quickemu) `Quickly create and run optimised Windows, macOS and Linux desktop virtual machines.`
   - [Uptime Kuma](https://github.com/louislam/uptime-kuma) `Self-hosted Uptime/Status Page`
+  - [XBackBone](https://xbackbone.app/) `Simple and light-weight PHP file manager with ShareX integration.`
 - File Wiping
   - [ABAN](https://aban.derobert.net/) `Bootable alternative to DBAN, has UEFI support and is based on Debian.`
   - [DBAN](https://dban.org/) `Bootable drive wiper, Works with BIOS only. But has a paid option for UEFI support.`
+  - [ShredOS](https://github.com/PartialVolume/shredos.x86_64#readme) `DBAN but better and for modern systems. Based off Debian.` 
 
 # Windows
 [`Go to top`](#top)
-- [xp](https://github.com/Fuwn/xp) `Windows XP License Keys`
+- [XP](https://github.com/Fuwn/xp) `Windows XP License Keys`
 - [Windows-collection](https://github.com/LaoYangList/Windows-collection) `List of publicly available Windows ISO Files`
 - Customization
   - [RetroBar](https://github.com/dremin/RetroBar) `Retro Taskbar`
@@ -54,9 +58,12 @@
   - [DevToys](https://github.com/veler/DevToys) `A Swiss Army knife for developers.`
   - [Eraser](https://eraser.heidi.ie/) `Secure File and Drive Wiper`
   - [PowerTools](github.com/microsoft/powertoys) `Windows system utilities to maximize productivity`
+  - [Everything](https://www.voidtools.com/) `Tool to see everything on your computer`
+  - [ShareX](https://getsharex.com/) `Powerful Screen capture tool`
 
 # Linux
 - [App Image Launcher](https://github.com/TheAssassin/AppImageLauncher) `Helper application for Linux distributions serving as a kind of "entry point" for running and integrating AppImages`
+- [winapps](https://github.com/winapps-org/winapps) `Run Windows applications seamlessly with the power of RDP`
 
 # Wallpapers
 - [Creating a macOS-Style wallpaper in Photoshop](http://web.archive.org/web/20080123065049/http://psdtuts.com/tutorials-effects/creating-a-mac-type-background-in-photoshop/) `Cool tutorial`
@@ -67,4 +74,6 @@
 # Other
 - [Anime Girls Holding Programming Books](https://github.com/cat-milk/Anime-Girls-Holding-Programming-Books)
 - [catppuccin](https://github.com/catppuccin/) `Color Scheme`
+- [NBN FTTP Upgrade Map](https://github.com/LukePrior/nbn-upgrade-map) `Interactive map showing premises eligible for the NBN FTTP upgrade program.`
+- [macOS on VirtualBox](https://github.com/myspaghetti/macos-virtualbox) `Push-button installer of macOS`
 
