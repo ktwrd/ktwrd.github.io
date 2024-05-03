@@ -47,6 +47,8 @@ For more detail, see [this blog post](https://sebnilsson.com/blog/from-csharp-to
 | `uint`        | `u32`          | |
 | `long`        | `i64`          | |
 | `ulong`       | `u64`          | |
+| N/A           | `i128`         | Does not exist natively in C# |
+| N/A           | `u128`         | Does not exist natively in C# |
 | `float`       | `f32`          | |
 | `double`      | `f64`          | |
 | `decimal`     | `f128`         | (Rust) Not supported on all platforms. |
