@@ -3,23 +3,32 @@
 - [Programming](#programming)
 - [Tools](#tools)
 - [Windows](#windows)
+- [Linux](#linux)
 - [Wallpapers](#wallpapers)
 - [Other](#other)
 
 # Programming
 [`Go to top`](#top)
-- [Gitahead](https://gitahead.com) `Version Control`
-- [Github Desktop](https://desktop.github.com/) `Git GUI made by Github`
-  * [Linux Version (Shiftkey)](https://github.com/shiftkey/desktop/releases/latest)
+- Version Control
+  - [Gitahead](https://gitahead.com) `Windows/Linux/Mac`
+  - [GitKraken](https://www.gitkraken.com/) `Windows/Linux/Mac`
+  - [Sourcetree](https://www.sourcetreeapp.com/) `Windows/Mac`
+  - [Github Desktop](https://desktop.github.com/) `Git GUI made by Github`
+    * [Linux Version (Shiftkey)](https://github.com/shiftkey/desktop/releases/latest)
 - [Visual Studio](https://visualstudio.com) `IDE, I use it for C++/C# Development`
+- [Jetbrains Rider](https://www.jetbrains.com/rider/) `Best C# Code editor. For .resx files, and Winforms, stick to Visual Studio` (Paid)
+  * Has student discounts. Worth the money!
 - [Visual Studio Code](https://code.visualstudio.com/) `IDE`
 - C#
   - [ConfuserEx-Reborn](https://github.com/CubeCoders/ConfuserEx-Reborn) `An open-source, free protector for .NET applications`
   - [de4dot-cex](https://github.com/ViRb3/de4dot-cex) `de4dot deobfuscator with full support for vanilla ConfuserEx`
   - [DoubleSharp](https://github.com/daeken/DoubleSharp) `A set of extension methods and helpers for .NET`
-  - [MoltenEngine](https://github.com/Syncaidius/MoltenEngine) `A .NET 7 game engine project. Cross-platform, multi-threaded.`
+  - [MoltenEngine](https://github.com/Syncaidius/MoltenEngine) `A .NET game engine project. Cross-platform, multi-threaded.`
   - [Myra](https://github.com/rds1983/Myra) `UI Library for MonoGame, FNA and Stride`
   - [VTF.NET](https://github.com/marv7000/VTF.NET) `C# Library for dealing with VTF files`
+  - [Mailkit](https://github.com/jstedfast/MailKit) `Library for generating and sending emails`
+  - [WindowsRibbom](https://github.com/harborsiem/WindowsRibbon) `Easily create Ribbons for usage with WinForms applications`
+ - [CloudCompare](https://comparecloud.in/) `Compare Cloud Service Providers`
 
 # Tools
 [`Go to top`](#top)
@@ -29,6 +38,10 @@
 - File Sharing
   - [ShareX](https://github.com/ShareX/ShareX) `Screen capture and file sharing tool`
   - [Syncthing](https://syncthing.net/) `P2P File Syncronizing`
+- Streaming
+  - [Jellyfin](https://jellyfin.org/) `Open-source self-hosted streaming`
+    * [Finamp](https://github.com/jmshrv/finamp) `Best Audio Streaming app for Jellyfin`
+  - [Plex](https://plex.tv) `Self-hosted streaming and streaming source aggregator`
 - Sysadmin
   - [flame](https://github.com/pawelmalak/flame) `Self-hosted Dashboard/Homepage`
   - [Gitea](https://gita.io) ([Source](https://github.com/go-gitea/gitea)) `Git Server written in Go`
@@ -37,6 +50,7 @@
   - [quickemu](https://github.com/quickemu-project/quickemu) `Quickly create and run optimised Windows, macOS and Linux desktop virtual machines.`
   - [Uptime Kuma](https://github.com/louislam/uptime-kuma) `Self-hosted Uptime/Status Page`
   - [XBackBone](https://xbackbone.app/) `Simple and light-weight PHP file manager with ShareX integration.`
+  - [Apache Guacamole](https://guacamole.apache.org/) `Remotely manage devices via a web interface`
 - File Wiping
   - [ABAN](https://aban.derobert.net/) `Bootable alternative to DBAN, has UEFI support and is based on Debian.`
   - [DBAN](https://dban.org/) `Bootable drive wiper, Works with BIOS only. But has a paid option for UEFI support.`
@@ -44,15 +58,19 @@
 
 # Windows
 [`Go to top`](#top)
-- [XP](https://github.com/Fuwn/xp) `Windows XP License Keys`
+- [XP License Keys](https://github.com/Fuwn/xp) `Windows XP License Keys`
 - [Windows-collection](https://github.com/LaoYangList/Windows-collection) `List of publicly available Windows ISO Files`
 - Customization
   - [RetroBar](https://github.com/dremin/RetroBar) `Retro Taskbar`
   - [Open-Shell](https://open-shell.github.io/Open-Shell-Menu/) ([Source](https://github.com/Open-Shell/Open-Shell-Menu)) `Alternative shell for Windows. Based off ClassicShell`
-  - [WindowBlinds](https://stardock.com/products/windowblinds) (Paid) `Shell Customization`
+  - [SecureUxTheme](https://github.com/namazso/SecureUxTheme) `Used for patching themes that use msstyles`
+  - Themes
+    - [Aero10](https://www.deviantart.com/vaporvance/art/Aero10-for-Windows-10-1903-22H2-909711949) `Windows 7/Vista style theme pack for Windows 10`
 - Music Players
   - [foobar2000](https://www.foobar2000.org/) `Music Player with very good cuesheet support`
   - [WACUP](https://getwacup.com/) `Fork of WinAmp`
+    - [WinAmp Skins](https://winampheritage.com/skins) `Skins for WACUP and WinAmp`
+    - [gen_native](https://github.com/0x5066/gen_native) `Winamp Main Window as a native style OS window`
   - [WinAmp](https://www.winamp.com/player/downloads/) `Audio Player, WACUP recommended over vanilla WinAmp`
 - Tools
   - [DevToys](https://github.com/veler/DevToys) `A Swiss Army knife for developers.`
@@ -64,6 +82,7 @@
 # Linux
 - [App Image Launcher](https://github.com/TheAssassin/AppImageLauncher) `Helper application for Linux distributions serving as a kind of "entry point" for running and integrating AppImages`
 - [winapps](https://github.com/winapps-org/winapps) `Run Windows applications seamlessly with the power of RDP`
+- [zsh-mommy](https://github.com/catuhana/zsh-mommy)
 
 # Wallpapers
 - [Creating a macOS-Style wallpaper in Photoshop](http://web.archive.org/web/20080123065049/http://psdtuts.com/tutorials-effects/creating-a-mac-type-background-in-photoshop/) `Cool tutorial`
@@ -76,4 +95,6 @@
 - [catppuccin](https://github.com/catppuccin/) `Color Scheme`
 - [NBN FTTP Upgrade Map](https://github.com/LukePrior/nbn-upgrade-map) `Interactive map showing premises eligible for the NBN FTTP upgrade program.`
 - [macOS on VirtualBox](https://github.com/myspaghetti/macos-virtualbox) `Push-button installer of macOS`
+- [Cloud Service Free Tier Comparison](https://github.com/cloudcommunity/Cloud-Free-Tier-Comparison)
+- [CloudCompare](https://comparecloud.in/) `Compare Cloud Service Providers`
 
