@@ -23,18 +23,19 @@
 | `wchar_t`                | `u8`           | |
 
 ## stdint/cstdint types
-| C++                      | Rust           |
-| ------------------------ | -------------- |
-| `int8_t`                 | `i8`           |
-| `uint8_t`                | `u8`           |
-| `int16_t`                | `i16`          |
-| `uint16_t`               | `u16`          |
-| `int32_t`                | `i32`          |
-| `uint32_t`               | `ui32`         |
-| `int64_t`                | `i64`          |
-| `uint64_t`               | `u64`          |
+| C++                      | Rust           | C#       |
+| ------------------------ | -------------- | -------- |
+| `int8_t`                 | `i8`           | `sbyte`  |
+| `uint8_t`                | `u8`           | `byte`   |
+| `int16_t`                | `i16`          | `short`  |
+| `uint16_t`               | `u16`          | `ushort` |
+| `int32_t`                | `i32`          | `int`    |
+| `uint32_t`               | `ui32`         | `uint`   |
+| `int64_t`                | `i64`          | `long`   |
+| `uint64_t`               | `u64`          | `ulong`  |
 
 # C# to Rust
+For more detail, see [this blog post](https://sebnilsson.com/blog/from-csharp-to-rust-code-basics/). (Which isn't by me)
 | C#            | Rust           | Note |
 | ------------- | -------------- | ---- |
 | `sbyte`       | `u8`           | |
