@@ -35,6 +35,7 @@
  - [CloudCompare](https://comparecloud.in/) `Compare Cloud Service Providers`
 - Rust
   - [fltk-rs](https://github.com/fltk-rs) `Rust bindings for the FLTK GUI library`
+  - [include-flate](https://crates.io/crates/include-flate) `Include bytes/string with compression`
 
 # Tools
 [`Go to top`](#top)
