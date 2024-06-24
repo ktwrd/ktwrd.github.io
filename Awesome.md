@@ -10,14 +10,17 @@
 # Programming
 [`Go to top`](#top)
 - Version Control
-  - [Gitahead](https://gitahead.com) `Windows/Linux/Mac`
+  - [Gitahead](https://gitahead.com) `Windows/Linux/Mac, Commit Signing is a bit broken on Wndows`
   - [GitKraken](https://www.gitkraken.com/) `Windows/Linux/Mac`
   - [Sourcetree](https://www.sourcetreeapp.com/) `Windows/Mac`
   - [Github Desktop](https://desktop.github.com/) `Git GUI made by Github`
     * [Linux Version (Shiftkey)](https://github.com/shiftkey/desktop/releases/latest)
+  - [Git Cola](https://git-cola.github.io/)
 - [Visual Studio](https://visualstudio.com) `IDE, I use it for C++/C# Development`
 - [Jetbrains Rider](https://www.jetbrains.com/rider/) `Best C# Code editor. For .resx files, and Winforms, stick to Visual Studio` (Paid)
   * Has student discounts. Worth the money!
+- [Jetbrains RustRover](https://www.jetbrains.com/rust/) `Very good rustlang IDE`
+  * Free for personal, paid for commercial.
 - [Visual Studio Code](https://code.visualstudio.com/) `IDE`
 - C#
   - [ConfuserEx-Reborn](https://github.com/CubeCoders/ConfuserEx-Reborn) `An open-source, free protector for .NET applications`
@@ -30,6 +33,8 @@
   - [WindowsRibbom](https://github.com/harborsiem/WindowsRibbon) `Easily create Ribbons for usage with WinForms applications`
   - [LINQPad](https://www.linqpad.net/) `Desktop C# Playground with SQL and debugging and benchmarking built-in`
  - [CloudCompare](https://comparecloud.in/) `Compare Cloud Service Providers`
+- Rust
+  - [fltk-rs](https://github.com/fltk-rs) `Rust bindings for the FLTK GUI library`
 
 # Tools
 [`Go to top`](#top)
