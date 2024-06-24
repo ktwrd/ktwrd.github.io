@@ -28,6 +28,7 @@
   - [VTF.NET](https://github.com/marv7000/VTF.NET) `C# Library for dealing with VTF files`
   - [Mailkit](https://github.com/jstedfast/MailKit) `Library for generating and sending emails`
   - [WindowsRibbom](https://github.com/harborsiem/WindowsRibbon) `Easily create Ribbons for usage with WinForms applications`
+  - [LINQPad](https://www.linqpad.net/) `Desktop C# Playground with SQL and debugging and benchmarking built-in`
  - [CloudCompare](https://comparecloud.in/) `Compare Cloud Service Providers`
 
 # Tools
