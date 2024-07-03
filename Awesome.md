@@ -2,6 +2,7 @@
 
 - [Programming](#programming)
 - [Tools](#tools)
+- [Fedi](#fedi)
 - [Windows](#windows)
 - [Linux](#linux)
 - [Wallpapers](#wallpapers)
@@ -32,16 +33,14 @@
   - [Mailkit](https://github.com/jstedfast/MailKit) `Library for generating and sending emails`
   - [WindowsRibbom](https://github.com/harborsiem/WindowsRibbon) `Easily create Ribbons for usage with WinForms applications`
   - [LINQPad](https://www.linqpad.net/) `Desktop C# Playground with SQL and debugging and benchmarking built-in`
- - [CloudCompare](https://comparecloud.in/) `Compare Cloud Service Providers`
+- [CloudCompare](https://comparecloud.in/) `Compare Cloud Service Providers`
 - Rust
   - [fltk-rs](https://github.com/fltk-rs) `Rust bindings for the FLTK GUI library`
   - [include-flate](https://crates.io/crates/include-flate) `Include bytes/string with compression`
+  - [cargo-pak](https://github.com/toastxc/cargo-pak) `Generate manifest and desktop files for flatpak`
 
 # Tools
 [`Go to top`](#top)
-- Fediverse
-  - [FediFinder](https://finder.dariox.club) ([Source](https://github.com/lucahammer/fedifinder)) `Find fediverse addresses in the profiles of your Twitter following`
-  - [fedi-block-api](https://github.com/ktwrd/fedi-block-api-mirror) ([Source](https://gitgud.io/mintplg/fedi-block-api), [Mirror](https://github.com/ktwrd/fedi-block-api-mirror)) `See whos blocked what instance`
 - File Sharing
   - [ShareX](https://github.com/ShareX/ShareX) `Screen capture and file sharing tool`
   - [Syncthing](https://syncthing.net/) `P2P File Syncronizing`
@@ -62,6 +61,16 @@
   - [ABAN](https://aban.derobert.net/) `Bootable alternative to DBAN, has UEFI support and is based on Debian.`
   - [DBAN](https://dban.org/) `Bootable drive wiper, Works with BIOS only. But has a paid option for UEFI support.`
   - [ShredOS](https://github.com/PartialVolume/shredos.x86_64#readme) `DBAN but better and for modern systems. Based off Debian.` 
+
+# Fedi
+[`Go to top`](#top)
+- Tools
+  - [FediFinder](https://finder.dariox.club) ([Source](https://github.com/lucahammer/fedifinder)) `Find fediverse addresses in the profiles of your Twitter following`
+  - [fedi-block-api](https://github.com/ktwrd/fedi-block-api-mirror) ([Source](https://gitgud.io/mintplg/fedi-block-api), [Mirror](https://github.com/ktwrd/fedi-block-api-mirror)) `See whos blocked what instance`
+- Platforms
+  - [darioxmastodon](https://github.com/darioxmastodon/mastodon)
+  - [Toki](https://github.com/purifetchi/Toki) `Mastodon compatible server written in C#`
+  - [bird.makeup](https://git.sr.ht/~cloutier/bird.makeup) `Twitter/fedi bridge written in C#`
 
 # Windows
 [`Go to top`](#top)
