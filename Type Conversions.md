@@ -1,4 +1,4 @@
-
+Just some type conversions between languages and SQL dialects. Copied from multiple sources to make an AIO cheat sheet.
 
 # C++ to Rust
 | C++                      | Rust           | Note |
@@ -53,6 +53,75 @@ For more detail, see [this blog post](https://sebnilsson.com/blog/from-csharp-to
 | `double`      | `f64`          | |
 | `decimal`     | `f128`         | (Rust) Not supported on all platforms. |
 
+# SQL Server to C#
+
+| SQL Server         | C#                   | System.Data.SqlDbType |
+| ------------------ | -------------------- | --------------------- |
+| `date`             | `Date`               | `Date`                |
+| `time`             | `TimeSpan`           | `Time`                |
+| `datetime`         | `DateTime`           | `DateTime`            |
+| `datetime2`        | `DateTime`           | `DateTime2`           |
+| `datetimeoffset`   | `DateTimeOffset`     | `DateTimeOffset`      |
+| `smalldatetime`    | `DateTime`           | `DateTime`            |
+| **Text** | |
+| `char`             | `string`, `char[]`   | `Char`                |
+| `nchar`            | `string`, `char[]`   | `NChar`               |
+| `varchar`          | `string`, `char[]`   | `VarChar`             |
+| `nvarchar`         | `string`, `char[]`   | `NVarChar`            |
+| `text`             | `string`, `char[]`   | `Text`                |
+| `ntext`            | `string`, `char[]`   | `NText`               |
+| **Numerical** | |
+| `int`              | `Int32`, `int`       | `Int`                 |
+| `tinyint`          | `byte`               | `TinyInt`             |
+| `bigint`           | `Int64`, `long`      | `BigInt`              |
+| `smallint`         | `Int16`, `short`     | `SmallInt`            |
+| `smallmoney`       | `Decimal`, `decimal` | `SmallMoney`          |
+| `decimal`          | `Decimal`, `decimal` | `Decimal`             |
+| `real`             | `Single`, `float`    | `Real`                |
+| `float`            | `Double`, `double`   | `Float`               |
+| `numeric`          | `Decimal`, `decimal` | `Decimal`             |
+| `money`            | `Decimal`, `decimal` | `Money`               |
+| **Binary** | |
+| `image`            | `byte[]`             | `Binary`              |
+| `binary`           | `byte[]`             | `VarBinary`           |
+| `varbinary`        | `byte[]`             | `VarBinary`           |
+| `FILESTREAM`       | `byte[]`             | `VarBinary`           |
+| `rowversion`       | `byte[]`             | `Timestamp`           |
+| `timestamp`        | `byte[]`             | `Timestamp`           |
+| **Misc** | |
+| `bit`              | `bool`               | `Bit`                 |
+| `uniqueidentifier` | `Guid`               | `UniqueIdentifier`    |
+| `xml`              | `Xml`                | `Xml`                 |
+
+# Oracle SQL to C#
+
+| Oracle Data Type                 | C#         | Notes |
+| -------------------------------- | ---------- | ----- |
+| `BFILE`                          | `byte[]`   |
+| `BLOB`                           | `byte[]`   |
+| `CHAR`                           | `string`   |
+| `CLOB`                           | `string`   |
+| `DATE`                           | `DateTime` |
+| `FLOAT`                          | `Decimal`  |
+| `INTEGER`                        | `Decimal`  |
+| `INTERVAL YEAR TO MONTH`         | `Int32`    |
+| `INTERVAL DAY TO SECOND`         | `TimeSpan` |
+| `LONG`                           | `string`   |
+| `LONG RAW`                       | `byte[]`   |
+| `NCHAR`                          | `string`   |
+| `NCLOB`                          | `string`   |
+| `NUMBER`                         | `Decimal`  |
+| `NVARCHAR2`                      | `string`   |
+| `RAW`                            | `byte[]`   |
+| `ROWID`                          | `string`   |
+| `TIMESTAMP`                      | `DateTime` |
+| `TIMESTAMP WITH LOCAL TIME ZONE` | `DateTime` |
+| `TIMESTAMP WITH TIME ZONE`       | `DateTime` |
+| `UNSIGNED INTEGER`               | `Number`   | Alias to `NUMBER(38)`. When the data reader returns a `Decimal` or `OracleNumber` it can cause an overflow. |
+| `VARCHAR2`                       | `String`   |
+
 # References
 - [https://locka99.gitbooks.io/a-guide-to-porting-c-to-rust/content/features_of_rust/types.html](https://locka99.gitbooks.io/a-guide-to-porting-c-to-rust/content/features_of_rust/types.html)
 - [https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/integral-numeric-types](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/integral-numeric-types)
+- [https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/sql-server-data-type-mappings](https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/sql-server-data-type-mappings)
+- [https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/oracle-data-type-mappings](https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/oracle-data-type-mappings)
