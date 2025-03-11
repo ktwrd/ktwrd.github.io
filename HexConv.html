@@ -1,0 +1,57 @@
+
+
+<script type="text/javascript">
+function UpdateEscapedOutput() {
+	var inputElem = document.getElementById("hex-input");
+	var outputElem = document.getElementById("escaped-output");
+	var lengthElem = document.getElementById("length");
+	if (inputElem && outputElem) {
+		var values = [];
+		var inputSplit = inputElem.value.split(' ');
+		for (let i = 0; i < inputSplit.length; i++) {
+			let s = inputSplit[i];
+			if (s.trim().length < 1)
+				continue;
+			if (s == '?' || s == '??')
+				s = '2A';
+			if (s.length < 2)
+				s = '0' + s;
+			s = '\\x' + s.toUpperCase();
+			values.push(s);
+			// values.push('\\x' + (inputSplit[i].startsWith('?') ? '2A' : inputSplit[i].toUpperCase()));
+		}
+		let joined = values.join('');
+		outputElem.value = joined;
+		lengthElem.innerHTML = 'Length: ' + values.length;
+	}
+}
+UpdateEscapedOutput();
+// 55 8B EC 81 EC 24 05 00 00 53 56 68 ?? ?? ?? ??
+</script>
+<table>
+
+<tr>
+<td>Hex Input</td>
+<td>Escaped Output</td>
+</tr>
+<tr>
+<td>
+<input type="text" id="hex-input" onchange="UpdateEscapedOutput()" 
+   onkeypress = "this.onchange();"
+   onpaste    = "this.onchange();"
+   oninput    = "this.onchange();" />
+</td>
+<td>
+<input type="text" id="escaped-output" />
+</td>
+</tr>
+<tr>
+<td></td>
+<td><code id="length"></code>
+</tr>
+</table>
+<style>
+body {
+	background: white;
+}
+</style>
