@@ -3,7 +3,8 @@
     <head>
         <title>C# Exception Generator</title>
         <link href="style.css" rel="stylesheet" type="text/css" />
-        <link rel="stylesheet" href="lib/highlight/styles/vs2015.css"/>
+        <link rel="stylesheet" href="lib/bootstrap-icons/font/bootstrap-icons.min.css" />
+        <link rel="stylesheet" href="lib/highlight/styles/vs2015.css" />
         <script src="lib/highlight/highlight.min.js"></script>
         <script type="text/javascript">hljs.highlightAll();</script>
     </head>
@@ -12,44 +13,66 @@
             <h2>C# Exception Generator</h2>
             <hr/>
             <div class="row align-items-start">
-                <div class="col is-half is-full-mobile">
+                <div class="col is-40 is-full-mobile">
                     <h4>Parameters</h4>
-                    <table class="table">
-                        <tr>
-                            <th>Class Name</th>
-                            <td>
+                    <div class="container-table">
+                        <div class="row">
+                            <div class="col-3">
+                                <b>Class Name</b>
+                            </div>
+                            <div class="col">
                                 <input type="text" id="className" style="width: 100%; font-family: monospace;">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Class Summary</th>
-                            <td>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <b>Summary</b>
+                            </div>
+                            <div class="col">
                                 <textarea id="summary" style="width: 100%"></textarea>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Include Default Constructors</th>
-                            <td><input type="checkbox" id="includeDefaultCtor"></td>
-                        </tr>
-                        <tr>
-                            <th>Nullable Parameters</th>
-                            <td><input type="checkbox" id="nullable" checked></td>
-                        </tr>
-                        <tr>
-                            <th>Inherit XML Comments for Constructors</th>
-                            <td><input type="checkbox" id="inheritdoc"></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <a href="#" class="btn btn-primary my-2" id="generate">Generate</a>
-                            </td>
-                        </tr>
-                    </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <b>Include Default Constructors</b>
+                            </div>
+                            <div class="col">
+                                <input type="checkbox" id="includeDefaultCtor" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <b>Nullable Parameters</b>
+                            </div>
+                            <div class="col">
+                                <input type="checkbox" id="nullable" checked />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <b>Inherit XML Comments for Constructors</b>
+                            </div>
+                            <div class="col">
+                                <input type="checkbox" id="inheritdoc" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-auto">
+                                <button class="btn btn-primary" id="generate">Generate</button>
+                            </div>
+                            <div class="col-auto">
+                                <button class="btn btn-secondary" id="copy-output">
+                                    <i class="bi bi-copy"></i>
+                                    Copy Output
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
-                <div class="col is-half is-full-mobile">
+                <div class="col is-60 is-full-mobile">
                     <h4>Output</h4>
                     <pre class="code-content"><code class="language-csharp" id="output"></code></pre>
-                    <!-- <textarea id="output" style="height: calc(max(200px, 100vh - 200px))"></textarea> -->
                 </div>
             </div>
         </main>
@@ -134,6 +157,11 @@
             let className_elem = document.getElementById("className");
             let className = className_elem.value;
             generateContent(className);
+        });
+        document.getElementById("copy-output").addEventListener('click', () => {
+            const elem = document.getElementById('output');
+            navigator.clipboard.writeText(elem.innerText);
+            alert('Copied output to clipboard');
         });
         generateContent('ExampleException');
     </script>

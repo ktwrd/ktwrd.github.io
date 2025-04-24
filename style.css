@@ -1,4 +1,5 @@
-@import url("css/bootstrap.min.css");
+@import url("lib/bootstrap/css/bootstrap.min.css");
+
 textarea {
     min-height: 5rem;
 }
@@ -49,54 +50,16 @@ tr.fullwid th textarea {
     align-items: flex-start !important;
 }
 
-@media screen and (max-width: 991px) {
-    .col.is-full-mobile {
-        flex: none;
-        width: 100%;
-    }
+.container-table {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
 }
-@media screen and (max-width: 991px) {
-    .col.is-full-mobile {
-        flex: none;
-        width: 100%;
-    }
+.container-table .row {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #dee2e6;
 }
-@media screen and (max-width: 991px) {
-    .col.is-full-mobile {
-        flex: none;
-        width: 100%;
-    }
-}
-@media screen and (max-width: 991px) {
-    .col.is-full-mobile {
-        flex: none;
-        width: 100%;
-    }
-}
-@media screen and (max-width: 991px) {
-    .col.is-full-mobile {
-        flex: none;
-        width: 100%;
-    }
-}
-@media screen and (max-width: 991px) {
-    .col.is-full-mobile {
-        flex: none;
-        width: 100%;
-    }
-}
-@media screen and (max-width: 991px) {
-    .col.is-full-mobile {
-        flex: none;
-        width: 100%;
-    }
-}
-@media screen and (max-width: 991px) {
-    .col.is-full-mobile {
-        flex: none;
-        width: 100%;
-    }
-}
+
 @media screen and (max-width: 991px) {
     .col.is-full-mobile {
         flex: none;
@@ -110,50 +73,26 @@ tr.fullwid th textarea {
     }
 }
 @media screen and (min-width: 992px), print {
-    .col.is-half, .col.is-half-tablet {
+    .col.is-30, .col.is-30-tablet {
+        flex: none;
+        width: 30%;
+    }
+}
+@media screen and (min-width: 992px), print {
+    .col.is-40, .col.is-40-tablet {
+        flex: none;
+        width: 40%;
+    }
+}
+@media screen and (min-width: 992px), print {
+    .col.is-50, .col.is-50-tablet {
         flex: none;
         width: 50%;
     }
 }
 @media screen and (min-width: 992px), print {
-    .col.is-half, .col.is-half-tablet {
+    .col.is-60, .col.is-60-tablet {
         flex: none;
-        width: 50%;
-    }
-}
-@media screen and (min-width: 992px), print {
-    .col.is-half, .col.is-half-tablet {
-        flex: none;
-        width: 50%;
-    }
-}
-@media screen and (min-width: 992px), print {
-    .col.is-half, .col.is-half-tablet {
-        flex: none;
-        width: 50%;
-    }
-}
-@media screen and (min-width: 992px), print {
-    .col.is-half, .col.is-half-tablet {
-        flex: none;
-        width: 50%;
-    }
-}
-@media screen and (min-width: 992px), print {
-    .col.is-half, .col.is-half-tablet {
-        flex: none;
-        width: 50%;
-    }
-}
-@media screen and (min-width: 992px), print {
-    .col.is-half, .col.is-half-tablet {
-        flex: none;
-        width: 50%;
-    }
-}
-@media screen and (min-width: 992px), print {
-    .col.is-half, .col.is-half-tablet {
-        flex: none;
-        width: 50%;
+        width: 60%;
     }
 }
