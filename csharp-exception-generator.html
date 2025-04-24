@@ -3,76 +3,138 @@
     <head>
         <title>C# Exception Generator</title>
         <link href="style.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="lib/highlight/styles/vs2015.css"/>
+        <script src="lib/highlight/highlight.min.js"></script>
+        <script type="text/javascript">hljs.highlightAll();</script>
     </head>
     <body>
-        <main class="container" role="main">
-            <h3>C# Exception Generator</h3>
-            <table class="table">
-                <tr>
-                    <th>Class Name</th>
-                    <td>
-                        <input type="text" id="className" style="width: 100%; font-family: monospace;">
-                    </td>
-                </tr>
-                <tr>
-                    <th>Include Default Constructors</th>
-                    <td><input type="checkbox" id="includeDefaultCtor"></td>
-                </tr>
-                <tr>
-                    <th>Nullable Parameters</th>
-                    <td><input type="checkbox" id="nullable" checked></td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <a href="#" class="btn btn-primary my-2" id="generate">Generate</a>
-                    </td>
-                </tr>
-                <tr>
-                    <th colspan="2">Output</th>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <textarea id="output" style="height: 40vh"></textarea>
-                    </td>
-                </tr>
-            </table>
+        <main class="container-fluid" role="main">
+            <h2>C# Exception Generator</h2>
+            <hr/>
+            <div class="row align-items-start">
+                <div class="col is-half is-full-mobile">
+                    <h4>Parameters</h4>
+                    <table class="table">
+                        <tr>
+                            <th>Class Name</th>
+                            <td>
+                                <input type="text" id="className" style="width: 100%; font-family: monospace;">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Class Summary</th>
+                            <td>
+                                <textarea id="summary" style="width: 100%"></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Include Default Constructors</th>
+                            <td><input type="checkbox" id="includeDefaultCtor"></td>
+                        </tr>
+                        <tr>
+                            <th>Nullable Parameters</th>
+                            <td><input type="checkbox" id="nullable" checked></td>
+                        </tr>
+                        <tr>
+                            <th>Inherit XML Comments for Constructors</th>
+                            <td><input type="checkbox" id="inheritdoc"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <a href="#" class="btn btn-primary my-2" id="generate">Generate</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col is-half is-full-mobile">
+                    <h4>Output</h4>
+                    <pre class="code-content"><code class="language-csharp" id="output"></code></pre>
+                    <!-- <textarea id="output" style="height: calc(max(200px, 100vh - 200px))"></textarea> -->
+                </div>
+            </div>
         </main>
     </body>
     <script type="text/javascript">
-        const generateDefaultCtor = function(className, nullable)
+        const indent = function(width) {
+            if (width < 1) return '';
+            var r = '';
+            for (let i = 0; i < width; i++)
+                r += ' ';
+            return r;
+        };
+        const generateDefaultCtor = function(className, nullable, inheritdoc)
         {
             let str = nullable ? 'string?' : 'string'
             let exc = nullable ? 'Exception?' : 'Exception';
-            return `#region Constructors
-    public ${className}() : base()
-    {}
-    public ${className}(${str} message) : base(message)
-    {}
-    public ${className}(${str} message, ${exc} innerException) : base(message, innerException)
-    {}
-#endregion\n`;
+            const ihd = ['/// <inheritdoc/>'];
+            const r = [
+                ...[
+                ...(inheritdoc ? ihd : []),
+                `public ${className}() : base()`,
+                '{}',
+                '',
+                ...(inheritdoc ? ihd : []),
+                `public ${className}(${str} message) : base(message)`,
+                '{}',
+                '',
+                ...(inheritdoc ? ihd : []),
+                `public ${className}(${str} message, ${exc} innerException) : base(message, innerException)`,
+                '{}'
+                ],
+            ];
+            return r;
+        }
+        function generateContent(className) {
+            let defCtor_elem = document.getElementById("includeDefaultCtor")
+            let nullable_elem = document.getElementById("nullable")
+            let inheritdoc_elem = document.getElementById("inheritdoc")
+            let summary_elem = document.getElementById("summary")
+
+            let nullable = nullable_elem.checked
+            let inheritdoc = inheritdoc_elem.checked
+            let summary = summary_elem.value
+            let defCtor = defCtor_elem.checked
+            let defCtorContent = generateDefaultCtor(className, nullable, inheritdoc)
+            console.log(defCtorContent)
+            const constructorContent = defCtor ? [
+                '#region Constructors',
+                ...defCtorContent.map(e => indent(4) + e),
+                '#endregion',
+                '',
+            ] : [];
+
+            const lines = [
+                ...(summary.trim().length > 0 ? [
+                    '/// <summary>',
+                    ...summary.split('\n').map(e => '/// ' + e),
+                    '/// </summary>'
+                ] : []),
+                '/// <remarks>',
+                '/// Generated with',
+                '/// <see href="https://ktwrd.github.io/csharp-exception-generator.html"/>',
+                '/// </remarks>',
+                `public class ${className} : Exception`,
+                '{',
+                ...constructorContent,
+                ...[
+                    '/// <inheritdoc/>',
+                    'public override string ToString()',
+                    '{',
+                    '    return base.ToString();',
+                    '}',
+                ].map(e => indent(4) + e),
+                '}'
+            ];
+            let content = lines.join('\n');
+            const htmlContent = hljs.highlight(content, { language: 'csharp' }).value;
+            document.getElementById("output").innerHTML = htmlContent;
         }
         document.getElementById("generate").addEventListener('click', () =>
         {
-            let className_elem = document.getElementById("className")
-            let defCtor_elem = document.getElementById("includeDefaultCtor")
-            let nullable_elem = document.getElementById("nullable")
-
-            let className = className_elem.value
-            let nullable = nullable_elem.checked
-            let defCtor = defCtor_elem.checked
-            let defCtorContent = generateDefaultCtor(className, nullable)
-            console.log(defCtorContent)
-            let content =
-`public class ${className} : Exception
-{
-${defCtor ? defCtorContent : ''}
-    public override string ToString()
-    {
-        return base.ToString();
-    }
-}`;
-            document.getElementById("output").innerHTML = content
-        })
+            let className_elem = document.getElementById("className");
+            let className = className_elem.value;
+            generateContent(className);
+        });
+        generateContent('ExampleException');
     </script>
 </html>

@@ -1,9 +1,12 @@
 @import url("css/bootstrap.min.css");
 textarea {
-    min-height: 10rem;
+    min-height: 5rem;
 }
 main.container[role=main] {
     margin-top: 3rem;
+}
+main.container-fluid[role=main] {
+    margin-top: 1rem;
 }
 textarea#output {
     width: 100%;
@@ -11,6 +14,12 @@ textarea#output {
 }
 textarea.code {
     font-family: monospace;
+}
+
+pre.code-content,
+pre.code-content code,
+code.code-content {
+    height: calc(max(200px, 100vh - 200px));
 }
 
 tr.fullwid td textarea,
@@ -25,4 +34,126 @@ tr.fullwid th textarea {
 .flow div,
 .flow button {
     margin-right: 3rem;
+}
+
+.row {
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: calc(-1 * var(--bs-gutter-y));
+    margin-right: calc(-.5 * var(--bs-gutter-x));
+    margin-left: calc(-.5 * var(--bs-gutter-x));
+}
+.align-items-start {
+    align-items: flex-start !important;
+}
+
+@media screen and (max-width: 991px) {
+    .col.is-full-mobile {
+        flex: none;
+        width: 100%;
+    }
+}
+@media screen and (max-width: 991px) {
+    .col.is-full-mobile {
+        flex: none;
+        width: 100%;
+    }
+}
+@media screen and (max-width: 991px) {
+    .col.is-full-mobile {
+        flex: none;
+        width: 100%;
+    }
+}
+@media screen and (max-width: 991px) {
+    .col.is-full-mobile {
+        flex: none;
+        width: 100%;
+    }
+}
+@media screen and (max-width: 991px) {
+    .col.is-full-mobile {
+        flex: none;
+        width: 100%;
+    }
+}
+@media screen and (max-width: 991px) {
+    .col.is-full-mobile {
+        flex: none;
+        width: 100%;
+    }
+}
+@media screen and (max-width: 991px) {
+    .col.is-full-mobile {
+        flex: none;
+        width: 100%;
+    }
+}
+@media screen and (max-width: 991px) {
+    .col.is-full-mobile {
+        flex: none;
+        width: 100%;
+    }
+}
+@media screen and (max-width: 991px) {
+    .col.is-full-mobile {
+        flex: none;
+        width: 100%;
+    }
+}
+@media screen and (min-width: 992px), print {
+    .col.is-half, .col.is-half-tablet {
+        flex: none;
+        width: 50%;
+    }
+}
+@media screen and (min-width: 992px), print {
+    .col.is-half, .col.is-half-tablet {
+        flex: none;
+        width: 50%;
+    }
+}
+@media screen and (min-width: 992px), print {
+    .col.is-half, .col.is-half-tablet {
+        flex: none;
+        width: 50%;
+    }
+}
+@media screen and (min-width: 992px), print {
+    .col.is-half, .col.is-half-tablet {
+        flex: none;
+        width: 50%;
+    }
+}
+@media screen and (min-width: 992px), print {
+    .col.is-half, .col.is-half-tablet {
+        flex: none;
+        width: 50%;
+    }
+}
+@media screen and (min-width: 992px), print {
+    .col.is-half, .col.is-half-tablet {
+        flex: none;
+        width: 50%;
+    }
+}
+@media screen and (min-width: 992px), print {
+    .col.is-half, .col.is-half-tablet {
+        flex: none;
+        width: 50%;
+    }
+}
+@media screen and (min-width: 992px), print {
+    .col.is-half, .col.is-half-tablet {
+        flex: none;
+        width: 50%;
+    }
+}
+@media screen and (min-width: 992px), print {
+    .col.is-half, .col.is-half-tablet {
+        flex: none;
+        width: 50%;
+    }
 }
