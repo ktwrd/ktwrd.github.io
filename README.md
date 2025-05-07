@@ -11,7 +11,7 @@ Documents, and small html-based tools for writing code more quickly.
   * Used to generate classes where the JSON key does not match the resolved field/property name.
   * For use with [`System.Text.Json`](https://learn.microsoft.com/en-us/dotnet/api/system.text.json)
 - [C# String Enum Generator](enumgen.html)
-  * Used to generate enums that use [`EnumMemberAttribute`](https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.enummemberattribute) to specify the value to serialize/deserialze.
+  * Used to generate enums that use [`EnumMemberAttribute`](https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.enummemberattribute) to specify the value to serialize/deserialize.
 - [C# Exception Generator](csharp-exception-generator.html)
   * Quickly generate a renamed `Exception` class.
 
