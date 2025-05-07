@@ -20,3 +20,9 @@ Documents, and small html-based tools for writing code more quickly.
   * Used for generating controllers that interface with MongoDB. Similar to SQL DB Contexts.
 - [Xenia Controller Generator](xenia-discord-controllergen.html)
   * Used for generating general-purpose controllers.
+
+### Misc Tools
+- [HexConv](HexConv.html)
+  * Used for converting a hex string, into raw hex characters for use in [sdk13-gigalib](https://github.com/openfortress/sdk13-gigalib).
+- [HDWA - Generate ICopyLookupTableAction](hdwa-csharp-copylookuptableaction.html)
+  * Used at my job.
