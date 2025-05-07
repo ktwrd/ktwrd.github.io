@@ -208,8 +208,6 @@ document.getElementById('modelPropertyFilter_addBtn').addEventListener('click', 
     });
 });
 
-setTimeout(() => {
-}, 500);
 document.addEventListener('DOMContentLoaded', function() {
     generate({
         className: 'CopyExampleLookupTable',
