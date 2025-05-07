@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>HDWA - Generate ICopyLookupTableAction</title>
+        <link href="style.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="lib/bootstrap-icons/font/bootstrap-icons.min.css" />
+        <link rel="stylesheet" href="lib/highlight/styles/vs2015.css" />
+        <script src="lib/highlight/highlight.min.js"></script>
+        <script type="text/javascript">hljs.highlightAll();</script>
+    </head>
+    <body>
+        <main class="container-fluid" role="main">
+            <h2>Generate ICopyLookupTableAction</h2>
+            <hr/>
+
+            <div class="row align-items-start">
+                <div class="col is-40 is-full-mobile">
+                    <h4>Parameters</h4>
+                    <div class="container-table">
+                        <div class="row">
+                            <div class="col-3">
+                                <b>Class Name</b>
+                            </div>
+                            <div class="col">
+                                <input type="text" id="className" style="width: 100%; font-family: monospace;">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <b>Class Namespace</b>
+                            </div>
+                            <div class="col">
+                                <input type="text" id="classNamespace" style="width: 100%; font-family: monospace;">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <b>Model Class Name</b>
+                            </div>
+                            <div class="col">
+                                <input type="text" id="modelClassName" style="width: 100%; font-family: monospace;">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <b>Model Class Namespace</b>
+                            </div>
+                            <div class="col">
+                                <input type="text" id="modelClassNamespace" style="width: 100%; font-family: monospace;">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <b>Model Property Filter</b>
+                            </div>
+                            <div class="col">
+                                <div class="row">
+                                    <ul class="list-group" id="modelPropertyFilter" style="width: 100%">
+                                        <!-- <li class="list-group-item" style="width: 100%"><button type="button" class="btn btn-danger btn-sm mr-1">Del</button><span data-label="value" style="font-family: monospace;">Code</span></li> -->
+                                    </ul>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <input type="text" id="modelPropertyFilter_addText" style="width: 100%; font-family: monospace;" />
+                                    </div>
+                                    <div class="col-auto">
+                                        <button type="button" id="modelPropertyFilter_addBtn" class="btn btn-primary btn-sm">Add</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="useMicrosoftDataSqlClient" checked>
+                                    <label class="form-check-label" for="useMicrosoftDataSqlClient">Use <code>Microsoft.Data.SqlClient</code></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="indentWithSpaces" checked>
+                                    <label class="form-check-label" for="indentWithSpaces">Indent with spaces?</label>
+                                  </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <b>Indent Width</b>
+                            </div>
+                            <div class="col">
+                                <input type="number" min="0" max="20" id="indentWidth" value="4" style="width: 100%; font-family: monospace;">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-auto">
+                                <button class="btn btn-primary" id="generate">Generate</button>
+                            </div>
+                            <div class="col-auto">
+                                <button class="btn btn-secondary" id="copy-output">
+                                    <i class="bi bi-copy"></i>
+                                    Copy Output
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col is-60 is-full-mobile">
+                    <h4>Output</h4>
+                    <pre><code class="code-content language-csharp" id="output"></code></pre>
+                </div>
+            </div>
+        </main>
+    </body>
+    <script type="text/javascript" src="hdwa-csharp-generate-copylookupaction.js"></script>
+</html>
