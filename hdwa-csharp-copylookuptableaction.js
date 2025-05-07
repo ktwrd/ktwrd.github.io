@@ -94,6 +94,10 @@ function generate(options) {
     ];
 
     const classContent = [
+        '/// <remarks>',
+        '/// Generated with',
+        '/// <see href="https://ktwrd.github.io/hdwa-csharp-copylookuptableaction.html"/>',
+        '/// </remarks>',
         `public class ${options.className} : ICopyLookupTableAction`,
         '{',
         ...[
