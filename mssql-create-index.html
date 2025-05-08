@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SQL Server - Create Index</title>
+        <link href="style.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="lib/bootstrap-icons/font/bootstrap-icons.min.css" />
+        <link rel="stylesheet" href="lib/highlight/styles/vs2015.css" />
+        <script src="lib/highlight/highlight.min.js"></script>
+        <script type="text/javascript">hljs.highlightAll();</script>
+    </head>
+    <body>
+        <main class="container-fluid" role="main">
+            <h2>Generate "Create Index" Script</h2>
+            <sup>(for manual database upgrade scripts)</sup>
+            <hr/>
+
+            <div class="row align-items-start">
+                <div class="col is-40 is-full-mobile">
+                    <h4>Parameters</h4>
+                    <div class="container-table">
+                        <div class="row">
+                            <div class="col-3">
+                                <b>Table Schema</b>
+                            </div>
+                            <div class="col">
+                                <input type="text" id="schema" style="width: 100%; font-family: monospace;" value="dbo">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <b>Table Name</b>
+                            </div>
+                            <div class="col">
+                                <input type="text" id="name" style="width: 100%; font-family: monospace;">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <b>Index Key Columns<br/><sup>comma separated</sup></b>
+                            </div>
+                            <div class="col">
+                                <input type="text" id="indexColumns" style="width: 100%; font-family: monospace;">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <b>Include Columns<br/><sup>comma separated</sup></b>
+                            </div>
+                            <div class="col">
+                                <input type="text" id="includedColumns" style="width: 100%; font-family: monospace;">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="clustered">
+                                    <label class="form-check-label" for="clustered">Clustered</label>
+                                  </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="unique">
+                                    <label class="form-check-label" for="unique">Unique</label>
+                                  </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-auto">
+                                <button class="btn btn-primary" id="generate">Generate</button>
+                            </div>
+                            <div class="col-auto">
+                                <button class="btn btn-secondary" id="copy-output">
+                                    <i class="bi bi-copy"></i>
+                                    Copy Output
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col is-60 is-full-mobile">
+                    <h4>Output</h4>
+                    <pre><code class="code-content language-sql" id="output"></code></pre>
+                </div>
+            </div>
+        </main>
+    </body>
+    <script type="text/javascript" src="mssql-create-index.js"></script>
+</html>
