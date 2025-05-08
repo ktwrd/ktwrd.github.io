@@ -98,7 +98,7 @@ document.getElementById('generate').addEventListener('click', function() {
     const tableElem = document.getElementById('name');
     const schemaElem = document.getElementById('schema');
     const clusteredElem = document.getElementById('clustered');
-    const uniqueElem = document.getElementById('unique');
+    // const uniqueElem = document.getElementById('unique');
     const indexElem = document.getElementById('indexColumns');
     const includeElem = document.getElementById('includedColumns');
 
@@ -106,7 +106,7 @@ document.getElementById('generate').addEventListener('click', function() {
         table: tableElem.value,
         schema: schemaElem.value,
         clustered: clusteredElem.checked,
-        unique: uniqueElem.checked,
+        unique: false,
         colIndex: indexElem.value.split(',').map(e => e.trim()).filter(e => e.length > 0),
         colInclude: includeElem.value.split(',').map(e => e.trim()).filter(e => e.length > 0)
     };
