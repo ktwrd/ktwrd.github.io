@@ -218,6 +218,11 @@ document.getElementById('modelPropertyFilter_addBtn').addEventListener('click', 
         parentElement.removeChild(rootElem);
     });
 });
+document.getElementById("copy-output").addEventListener('click', () => {
+    const elem = document.getElementById('output');
+    navigator.clipboard.writeText(elem.innerText);
+    alert('Copied output to clipboard');
+});
 
 document.addEventListener('DOMContentLoaded', function() {
     generate({
