@@ -16,13 +16,16 @@
  * @property {string} dapperHelperNamespace
  * @property {string} dapperExtensionsNamespace
  * @property {bool} ackCancellationToken
+ * @property {bool} useInsertQueryProperty
  */
 
 /** @type {AdvancedOptions} */
 const defaultAdvancedOptions = {
     dapperNamespace: 'Dapper',
     dapperHelperNamespace: 'SQLTool.Shared.Data.Helpers',
-    dapperExtensionsNamespace: 'SQLTool.Shared.Data.Extensions'
+    dapperExtensionsNamespace: 'SQLTool.Shared.Data.Extensions',
+    useInsertQueryProperty: true,
+    ackCancellationToken: true
 };
 
 /**
@@ -41,7 +44,7 @@ function buildNamespace(opts) {
             }
         }
         return Object.entries(adv)
-            .filter(e => e[1] != null)
+            .filter(e => e[1] != null && e[0].toLowerCase().includes('namespace'))
             .map(e => e[1]);
     }
     let res = [
@@ -92,6 +95,8 @@ function getAdvancedOptions() {
     data.dapperNamespace = valueOrNullWhenEmpty(ns);
     data.dapperHelperNamespace = valueOrNullWhenEmpty(hns);
     data.dapperExtensionsNamespace = valueOrNullWhenEmpty(ens);
+    data.ackCancellationToken = document.getElementById('advAckCancellationToken').checked;
+    data.useInsertQueryProperty = document.getElementById('advUseInsertQueryProperty').checked;
 
     return data;
 }
@@ -105,6 +110,19 @@ function setAdvancedOptions(adv) {
     document.getElementById('advDapperNamespace').value = adv.dapperNamespace;
     document.getElementById('advDapperHelperNamespace').value = adv.dapperHelperNamespace;
     document.getElementById('advDapperExtensionsNamespace').value = adv.dapperExtensionsNamespace;
+    document.getElementById('advAckCancellationToken').checked = adv.ackCancellationToken;
+    document.getElementById('advUseInsertQueryProperty').checked = adv.useInsertQueryProperty;
+}
+
+/**
+ * @param {GenerateOptions} opts 
+ * @returns {AdvancedOptions}
+ */
+function getAdvOptionsOrDefault(opts) {
+    if (!opts.advanced)
+        return defaultAdvancedOptions;
+
+    return opts.advanced;
 }
 
 /**
@@ -148,10 +166,16 @@ function generate(options) {
         '',
     ];
 
+    var adv = getAdvOptionsOrDefault(options);
+    var useCt = adv.ackCancellationToken === true;
+    var useiqProp = adv.useInsertQueryProperty === true;
+
     const loopContent = [
         'var item = data[i];',
-        'if (ct.IsCancellationRequested) return;',
-        '',
+        ...(useCt ? [
+            'if (ct.IsCancellationRequested) return;',
+            ''
+        ] : []),
         'var countQuery = item.GetRecordCountQuery(',
         ...options.modelPropertyFilter.map((e, i) => {
             return `\tnameof(item.${e})` + (
@@ -161,18 +185,23 @@ function generate(options) {
             )
         }),
         '',
-        'if (ct.IsCancellationRequested) return;',
-        '',
+        ...(useCt ? [
+            'if (ct.IsCancellationRequested) return;',
+            ''
+        ] : []),
         'var count = await TargetClient.ExecuteScalarAsync<int>(',
         '\tcountQuery,',
         '\titem);',
         '',
-        'if (ct.IsCancellationRequested) return;',
+        ...(useCt ? [
+            'if (ct.IsCancellationRequested) return;'
+        ] : []),
         'if (count < 1)',
         '{',
         '\tProgressMessage?.Invoke(this, new([' + options.modelPropertyFilter.map(e => `item.${e}?.ToString()` ).join(', ') + '], i + 1, data.Count));',
         '\tawait TargetClient.ExecuteAsync(',
-        `\t\t${options.modelClassName}.InsertQuery,`,
+        useiqProp ? `\t\t${options.modelClassName}.InsertQuery,`
+                  : `\t\tinsertQuery,`,
         '\t\titem);',
         '}'
     ];
@@ -183,6 +212,9 @@ function generate(options) {
         '\tthrow new InvalidDataException("Source or Target client is null.");',
         '}',
         '',
+        ...(useiqProp ?
+            [] : [`var insertQuery = DapperHelper.GetInsertQuery(typeof(${options.modelClassName}));`]
+        ),
         `var data = (await SourceClient.QueryAsync<${options.modelClassName}>("SELECT * FROM " + Name)).ToList();`,
         'for (int i = 0; i < data.Count; i++)',
         '{',
@@ -329,6 +361,7 @@ document.getElementById("copy-output").addEventListener('click', () => {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
+    setAdvancedOptions(null);
     generate({
         className: 'CopyExampleLookupTable',
         namespace: 'SQLTool.Shared.Example.Services.CopyLookupTableActions',
@@ -338,6 +371,6 @@ document.addEventListener('DOMContentLoaded', function() {
         indentWithSpaces: document.getElementById('indentWithSpaces').checked,
         indentWidth: null,
         modelPropertyFilter: ['Id'],
+        advanced: defaultAdvancedOptions
     });
-    setAdvancedOptions(null);
 });
