@@ -8,8 +8,110 @@
  * @property {string[]} modelPropertyFilter
  * @property {boolean} indentWithSpaces
  * @property {int} [indentWidth]
+ * @property {AdvancedOptions} [advanced]
+ */
+/**
+ * @typedef {Object} AdvancedOptions
+ * @property {string} dapperNamespace
+ * @property {string} dapperHelperNamespace
+ * @property {string} dapperExtensionsNamespace
+ * @property {bool} ackCancellationToken
  */
 
+/** @type {AdvancedOptions} */
+const defaultAdvancedOptions = {
+    dapperNamespace: 'Dapper',
+    dapperHelperNamespace: 'SQLTool.Shared.Data.Helpers',
+    dapperExtensionsNamespace: 'SQLTool.Shared.Data.Extensions'
+};
+
+/**
+ * @param {GenerateOptions} opts 
+ * @returns {string[]}
+ */
+function buildNamespace(opts) {
+    function buildAdvOpts() {
+        let adv = {...defaultAdvancedOptions};
+        if (opts.advanced) {
+            for (let x of Object.entries(opts.advanced))
+            {
+                if (typeof x[1] !== 'undefined') {
+                    adv[x[0]] = x[1];
+                }
+            }
+        }
+        return Object.entries(adv)
+            .filter(e => e[1] != null)
+            .map(e => e[1]);
+    }
+    let res = [
+        ...buildAdvOpts()
+    ];
+    if (!stringIsNullOrEmpty(opts.modelClassNamespace))
+        res.push(opts.modelClassNamespace);
+    if (opts.useMicrosoftDataSqlClient == true)
+        res.push('Microsoft.Data.SqlClient');
+    else
+        res.push('System.Data.SqlClient');
+
+    return res.sort().map(e => `using ${e};`);
+}
+
+/**
+ * @param {string|null} [value] 
+ * @returns {boolean}
+ */
+function stringIsNullOrEmpty(value) {
+    if (!value || typeof value !== 'string')
+        return true;
+    
+    return value.trim().length == 0
+        ? true
+        : false;
+}
+
+/**
+ * @returns {AdvancedOptions}
+ */
+function getAdvancedOptions() {
+    function valueOrNullWhenEmpty(element) {
+        if (!element || typeof element !== 'object')
+            return null;
+        if (stringIsNullOrEmpty(element.value))
+            return null;
+        else
+            return element.value;
+    }
+    
+    var ns = document.getElementById('advDapperNamespace');
+    var hns = document.getElementById('advDapperHelperNamespace');
+    var ens = document.getElementById('advDapperExtensionsNamespace');
+
+    var data = Object.fromEntries(Object.entries(defaultAdvancedOptions).map(e => [e[0], null]));
+
+    data.dapperNamespace = valueOrNullWhenEmpty(ns);
+    data.dapperHelperNamespace = valueOrNullWhenEmpty(hns);
+    data.dapperExtensionsNamespace = valueOrNullWhenEmpty(ens);
+
+    return data;
+}
+
+/**
+ * @param {AdvancedOptions} opts 
+ */
+function setAdvancedOptions(adv) {
+    if (!adv) adv = defaultAdvancedOptions;
+
+    document.getElementById('advDapperNamespace').value = adv.dapperNamespace;
+    document.getElementById('advDapperHelperNamespace').value = adv.dapperHelperNamespace;
+    document.getElementById('advDapperExtensionsNamespace').value = adv.dapperExtensionsNamespace;
+}
+
+/**
+ * 
+ * @param {Number} width 
+ * @returns {boolean}
+ */
 function indent(width) {
     if (!width || typeof width !== 'number')
         return '';
@@ -40,13 +142,7 @@ const defaultIndentWidth = 4;
  */
 function generate(options) {
     const header = [
-        'using Dapper;',
-        options.useMicrosoftDataSqlClient === true
-            ? 'using Microsoft.Data.SqlClient;'
-            : 'using System.Data.SqlClient;',
-        'using SQLTool.Shared.Data.Extensions;',
-        'using SQLTool.Shared.Data.Helpers;',
-        `using ${options.modelClassNamespace};`,
+        ...buildNamespace(options),
         '',
         'namespace ' + options.namespace + ';',
         '',
@@ -165,8 +261,10 @@ document.getElementById('generate').addEventListener('click', function () {
         useMicrosoftDataSqlClient: useMicrosoftDataSqlClientElement.checked,
         modelPropertyFilter: propertyFilterNames,
         indentWithSpaces: indentWithSpacesElement.checked,
-        indentWidth: parseInt(indentWidthElement.value)
+        indentWidth: parseInt(indentWidthElement.value),
+        advanced: getAdvancedOptions(),
     };
+    console.log('[generate] created options', options);
     generate(options);
 });
 
@@ -204,8 +302,9 @@ document.getElementById('modelPropertyFilter_addBtn').addEventListener('click', 
 
     const deleteButton = document.createElement('button');
     deleteButton.setAttribute('type', 'button');
-    deleteButton.classList.add('btn', 'btn-danger', 'btn-sm');
-    deleteButton.innerText = '-';
+    deleteButton.classList.add('btn', 'btn-danger', 'btn-sm', 'mr-2');
+    // deleteButton.innerText = '-';
+    deleteButton.appendChild(getIconElement('trash'));
 
     rootElem.appendChild(deleteButton);
     rootElem.appendChild(spanElement);
@@ -218,6 +317,11 @@ document.getElementById('modelPropertyFilter_addBtn').addEventListener('click', 
         parentElement.removeChild(rootElem);
     });
 });
+function getIconElement(name) {
+    const element = document.createElement('i');
+    element.className = `bi bi-${name}`;
+    return element;
+}
 document.getElementById("copy-output").addEventListener('click', () => {
     const elem = document.getElementById('output');
     navigator.clipboard.writeText(elem.innerText);
@@ -233,6 +337,7 @@ document.addEventListener('DOMContentLoaded', function() {
         useMicrosoftDataSqlClient: document.getElementById('useMicrosoftDataSqlClient').checked,
         indentWithSpaces: document.getElementById('indentWithSpaces').checked,
         indentWidth: null,
-        modelPropertyFilter: ['Id']
+        modelPropertyFilter: ['Id'],
     });
+    setAdvancedOptions(null);
 });

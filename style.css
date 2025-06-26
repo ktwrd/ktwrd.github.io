@@ -23,6 +23,11 @@ code.code-content {
     height: calc(max(200px, 100vh - 200px));
 }
 
+main[app=hdwa-csharp-copylookuptableaction] input[type=text] {
+    width: 100%;
+    font-family: monospace;
+}
+
 tr.fullwid td textarea,
 tr.fullwid th textarea {
     width: 100%;

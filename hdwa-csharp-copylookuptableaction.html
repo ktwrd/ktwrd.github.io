@@ -9,7 +9,7 @@
         <script type="text/javascript">hljs.highlightAll();</script>
     </head>
     <body>
-        <main class="container-fluid" role="main">
+        <main class="container-fluid" role="main" app="hdwa-csharp-copylookuptableaction">
             <h2>Generate ICopyLookupTableAction</h2>
             <hr/>
 
@@ -22,7 +22,7 @@
                                 <b>Class Name</b>
                             </div>
                             <div class="col">
-                                <input type="text" id="className" style="width: 100%; font-family: monospace;">
+                                <input type="text" id="className" />
                             </div>
                         </div>
                         <div class="row">
@@ -30,7 +30,7 @@
                                 <b>Class Namespace</b>
                             </div>
                             <div class="col">
-                                <input type="text" id="classNamespace" style="width: 100%; font-family: monospace;">
+                                <input type="text" id="classNamespace" />
                             </div>
                         </div>
                         <div class="row">
@@ -38,7 +38,7 @@
                                 <b>Model Class Name</b>
                             </div>
                             <div class="col">
-                                <input type="text" id="modelClassName" style="width: 100%; font-family: monospace;">
+                                <input type="text" id="modelClassName" />
                             </div>
                         </div>
                         <div class="row">
@@ -46,7 +46,7 @@
                                 <b>Model Class Namespace</b>
                             </div>
                             <div class="col">
-                                <input type="text" id="modelClassNamespace" style="width: 100%; font-family: monospace;">
+                                <input type="text" id="modelClassNamespace" />
                             </div>
                         </div>
                         <div class="row">
@@ -61,7 +61,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <input type="text" id="modelPropertyFilter_addText" style="width: 100%; font-family: monospace;" />
+                                        <input type="text" id="modelPropertyFilter_addText" />
                                     </div>
                                     <div class="col-auto">
                                         <button type="button" id="modelPropertyFilter_addBtn" class="btn btn-primary btn-sm">Add</button>
@@ -103,6 +103,42 @@
                                     Copy Output
                                 </button>
                             </div>
+                            <div class="col-auto">
+                                <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#collapseAdvanced" aria-expanded="false" aria-controls="collapseAdvanced">
+                                    <i class="bi bi-wrench-adjustable"></i>
+                                    Advanced Options
+                                </button>
+                            </div>
+                        </div>
+                        <div class="collapse" id="collapseAdvanced">
+                            <div class="card card-body mt-3">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <b><code>Dapper</code> Namespace</b>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" id="advDapperNamespace" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-3">
+                                        <b><code>DapperHelper</code> Namespace</b><br/>
+                                        <sup>empty for none</sup>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" id="advDapperHelperNamespace" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-3">
+                                        <b>Dapper Extensions Namespace</b><br/>
+                                        <sup>empty for none</sup>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" id="advDapperExtensionsNamespace" />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -113,5 +149,7 @@
             </div>
         </main>
     </body>
+    <script type="text/javascript" src="lib/jquery/jquery-3.7.1.slim.min.js"></script>
+    <script type="text/javascript" src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="hdwa-csharp-copylookuptableaction.js"></script>
 </html>
