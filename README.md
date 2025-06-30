@@ -26,4 +26,5 @@ Documents, and small html-based tools for writing code more quickly.
   * Used for converting a hex string, into raw hex characters for use in [sdk13-gigalib](https://github.com/openfortress/sdk13-gigalib).
 - [HDWA - Generate ICopyLookupTableAction](hdwa-csharp-copylookuptableaction.html)
   * Used at my job.
+- [HDWA - Eto.Forms View Model Generator](hdwa-csharp-eto-vm-gen.html)
 - [SQL Server - Generate "Create Index" Script](mssql-create-index.html)
