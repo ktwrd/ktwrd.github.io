@@ -4,6 +4,8 @@
  * @property {string} classNamespace
  * @property {boolean} indentWithSpaces
  * @property {number} indentWidth
+ * @property {string} accessModifier
+ * @property {boolean} classPartial
  * @property {EtoVmProperty[]} properties
  */
 
@@ -22,6 +24,8 @@ function getOptions() {
     const classNamespaceElement = document.getElementById('classNamespace');
     const indentWithSpacesElement = document.getElementById('indentWithSpaces');
     const indentWidthElement = document.getElementById('indentWidth');
+    const selectedAccessModifierElement = document.querySelector('select#accessModifier');
+    const classPartialElement = document.querySelector('input[type=checkbox]#classPartial');
 
     /** @type {EtoVmOptions} */
     const result = {
@@ -29,6 +33,8 @@ function getOptions() {
         classNamespace: classNamespaceElement.value,
         indentWithSpaces: indentWithSpacesElement.checked,
         indentWidth: parseInt(indentWidthElement.value),
+        accessModifier: selectedAccessModifierElement.value,
+        classPartial: classPartialElement.checked,
         properties: []
     };
     console.log('options: ', result);
@@ -68,11 +74,15 @@ function setOptions(options) {
     const classNamespaceElement = document.getElementById('classNamespace');
     const indentWithSpacesElement = document.getElementById('indentWithSpaces');
     const indentWidthElement = document.getElementById('indentWidth');
+    const accessModifierElement = document.querySelector('select#accessModifier');
+    const classPartialElement = document.querySelector('input[type=checkbox]#classPartial');
 
     classNameElement.value = options.className;
     classNamespaceElement.value = options.classNamespace;
     indentWithSpacesElement.checked = options.indentWithSpaces === true;
     indentWidthElement.value = parseInt(options.indentWidth);
+    accessModifierElement.value = options.accessModifier ? options.accessModifier : 'public';
+    classPartialElement.checked = options.classPartial === true;
 
     const propParentElement = document.querySelector('table#modelProps tbody');
     propParentElement.innerHTML = '';
@@ -160,13 +170,14 @@ function setOutputContent(content) {
  * @param {EtoVmOptions} options 
  */
 function generate(options) {
+    const p = options.classPartial ? ' partial' : '';
     const content = [
         `using HDWA.Common.EtoForms;`,
         `using System.Collections.ObjectModel;`,
         ``,
         `namespace ${options.classNamespace};`,
         ``,
-        `public class ${options.className} : ViewModelBase`,
+        `${options.accessModifier}${p} class ${options.className} : ViewModelBase`,
         `{`,
         ...options.properties.map(e => {
             return `\tprivate ${e.type} ${getPrivatePropName(e.name)} = ${e.default};`;
