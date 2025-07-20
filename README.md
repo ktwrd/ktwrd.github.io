@@ -2,6 +2,7 @@ Documents, and small html-based tools for writing code more quickly.
 
 - [Type Conversions](Type%20Conversions)
 - [Awesome List](Awesome)
+- [C# Programming Resources](CSharp%20Programming%20Resources)
 - [GCS Bucket Name Generator](gcs-bucketname-generator.html)
 - [Archives](Archives)
 - [Xonotic](xonotic)
