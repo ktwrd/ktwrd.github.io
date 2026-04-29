@@ -1,0 +1,3 @@
+lib -text diff
+lib/* -text diff
+lib/**/* -text diff
